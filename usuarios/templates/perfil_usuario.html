@@ -1,0 +1,216 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-4 md:p-8">
+        <div class="max-w-[1000px] mx-auto flex flex-col gap-6 pb-10">
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center text-sm text-[#616f89] dark:text-gray-400">
+                <a class="hover:text-primary transition-colors" href="{% url 'home' %}">Home</a>
+                <span class="material-symbols-outlined text-[16px] mx-2">chevron_right</span>
+                <span class="text-[#111318] dark:text-white font-medium">Perfil</span>
+            </nav>
+            <!-- Page Heading -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight text-[#111318] dark:text-white mb-2">Perfil do Usuário
+                    </h1>
+                    <p class="text-[#616f89] dark:text-gray-400">Gerencie suas informações pessoais.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button
+                        class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">save</span>
+                        Salvar Alterações
+                    </button>
+                </div>
+            </div>
+            <!-- Profile Header Card -->
+            <div
+                class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+                <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                    <div class="relative group cursor-pointer">
+                        <div class="size-24 md:size-32 rounded-full bg-cover bg-center border-4 border-white dark:border-gray-700 shadow-md"
+                            data-alt="Large profile picture of Joao da Silva"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCymPtyRkv4qS_Dpc0wMQ3In1bu5y3_770_e1qBMSAzpvOuvnctJ0nb81SDZQeTV8aUjj-mCjcHVdnR7Hk3mahX53wlfHN42usSG6Nf-g6cHTrnSQjf-vc6amPbnH9mrtIJL4dShj_NjkRBpng0QJebJ2eTuABhSrayLK-Tt8TWAvMt4lSaxx0ZbijSaNJc2T4hrhGOkaTrrUHwdKAG07YpA6mD-tRZpViJ-AZUUCA1cfMqdmLCjW9VzFVVziujB3E2E-KSRfo_WF0t');">
+                        </div>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <div class="flex flex-col md:flex-row items-center gap-3 mb-1">
+                            <h2 class="text-2xl font-bold text-[#111318] dark:text-white"><b>{{ user.first_name }} {{ user.last_name }}</b></h2>
+                            <h2 class="text-2xl font-bold text-[#111318] dark:text-white">Apelido</h2>
+                            <span
+                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 border border-primary/20">
+                                Vereador
+                            </span>
+                        </div>
+                        <p class="text-[#616f89] dark:text-gray-400 mb-4"> {{ user.groups.all|join:", " }}</p>
+                        <div
+                            class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-[#616f89] dark:text-gray-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                                <span>Entrou em Março 2021</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">schedule</span>
+                                <span>Último acesso: Hoje às 09:30</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-green-600 dark:text-green-400">
+                                <span class="material-symbols-outlined text-[18px] filled">verified</span>
+                                <span>Conta Verificada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Forms Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column: Personal Data (2 cols width) -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Personal Info Section -->
+                    <div
+                        class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+                        <div class="flex items-center gap-3 mb-6 border-b border-gray-100 dark:border-gray-800 pb-4">
+                            <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary">
+                                <span class="material-symbols-outlined">badge</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#111318] dark:text-white">Dados Pessoais</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Nome
+                                    Completo</label>
+                                <input
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5"
+                                    type="text" value="João da Silva" />
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">CPF</label>
+                                <input
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#616f89] dark:text-gray-400 focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5 "
+                                    type="text" value="000.456.789-11" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Data
+                                    de Nascimento</label>
+                                <input
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5"
+                                    type="date" value="1980-05-15" />
+                            </div>
+                            <div class="md:col-span-2">
+                                <label
+                                    class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Biografia
+                                    / Notas</label>
+                                <textarea
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5 resize-none"
+                                    placeholder="Escreva uma breve descrição..." rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Institutional Data Section -->
+                    <div
+                        class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+                        <div class="flex items-center gap-3 mb-6 border-b border-gray-100 dark:border-gray-800 pb-4">
+                            <div
+                                class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600 dark:text-purple-400">
+                                <span class="material-symbols-outlined">domain</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#111318] dark:text-white">Dados Institucionais</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Cargo
+                                    / Função</label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">work</span>
+                                    </span>
+                                    <select
+                                        class="w-full pl-10 rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5">
+                                        <option selected="">Vereador</option>
+                                        <option>Assessor</option>
+                                        <option>Secretário</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Partido
+                                    Político</label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">flag</span>
+                                    </span>
+                                    <select
+                                        class="w-full pl-10 rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5">
+                                        <option selected="">PV - Partido Verde</option>
+                                        <option>MDB</option>
+                                        <option>PT</option>
+                                        <option>PSDB</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label
+                                    class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Matrícula
+                                    / Identificação Interna</label>
+                                <input
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-input-dark text-[#616f89] dark:text-gray-400 focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5 font-mono"
+                                    readonly="" type="text" value="LEG-2023-8842" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Contact & Security (1 col width) -->
+                <div class="space-y-6">
+                    <!-- Contact Section -->
+                    <div
+                        class="bg-white dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+                        <div class="flex items-center gap-3 mb-6 border-b border-gray-100 dark:border-gray-800 pb-4">
+                            <div
+                                class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600 dark:text-green-400">
+                                <span class="material-symbols-outlined">contact_phone</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#111318] dark:text-white">Contato</h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">E-mail</label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                                    </span>
+                                    <input
+                                        class="w-full pl-10 rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5"
+                                        type="email" value="joao.silva@camara.gov.br" />
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-[#111318] dark:text-gray-300 mb-1.5">Telefone
+                                    / WhatsApp</label>
+                                <div class="relative">
+                                    <span
+                                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <span class="material-symbols-outlined text-[20px]">call</span>
+                                    </span>
+                                    <input
+                                        class="w-full pl-10 rounded-lg border-gray-200 dark:border-gray-700 bg-[#f8f9fa] dark:bg-input-dark text-[#111318] dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-card-dark transition-shadow text-sm py-2.5"
+                                        type="tel" value="(11) 98765-4321" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'base_home.html' %}
+
+{% block title %}ACOMPANHAMENTO DE DEMANDAS{% endblock %}
+
+{% block content %}
+
+<main class="flex-1">
+    <div class="mx-auto max-w-[900px] px-4 py-8 sm:px-6 lg:px-8">
+        <div class="mb-10 text-center">
+            <h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">Acompanhamento de
+                Demanda</h1>
+            <p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Consulte o status em tempo real
+                da sua solicitação legislativa.</p>
+        </div>
+        <div class="flex flex-col gap-8">
+            <div
+                class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-8">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">search</span>
+                    Consultar outro protocolo
+                </h3>
+                <div class="flex flex-col gap-4">
+                    <label class="sr-only" for="protocol-search">Número do Protocolo</label>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="relative flex-1">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <span class="material-symbols-outlined text-slate-400 text-[20px]">tag</span>
+                            </div>
+                            <input
+                                class="block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 pl-10 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-primary sm:text-sm"
+                                id="protocol-search" placeholder="Ex: 2023-8492-XJ" type="text" />
+                        </div>
+                        <button
+                            class="flex items-center justify-center gap-2 rounded-lg bg-slate-900 dark:bg-slate-700 px-8 py-3 text-sm font-bold text-white hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-10">
+                <div
+                    class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-8 border-b border-slate-100 dark:border-slate-800 gap-4">
+                    <div>
+                        <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-1">Status Atual: Em
+                            Análise</p>
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-3xl font-black text-slate-900 dark:text-white font-mono">#2023-8492-XJ</h3>
+                            <span
+                                class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 px-3 py-1 text-xs font-bold text-blue-700 dark:text-blue-300">
+                                <span class="h-2 w-2 rounded-full bg-blue-500"></span>
+                                RECEBIDO
+                            </span>
+                        </div>
+                    </div>
+                    <button
+                        class="flex items-center justify-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-6 py-3 text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">print</span>
+                        Imprimir Comprovante
+                    </button>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <div class="md:col-span-1">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Assunto da
+                                    Demanda</h4>
+                                <p class="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+                                    Solicitação de manutenção e reparo nos postes de iluminação pública da Rua das
+                                    Flores, bairro Centro. Moradores relatam escuridão total há 5 dias, comprometendo a
+                                    segurança local.
+                                </p>
+                            </div>
+                            <div
+                                class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Data de
+                                    Abertura</h4>
+                                <p class="text-sm font-medium text-slate-900 dark:text-white">24 de Outubro de 2023,
+                                    10:30</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Linha do Tempo de
+                            Evolução</h4>
+                        <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-800 space-y-10 ml-2">
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-primary text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
+                                <div class="flex flex-col gap-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-base font-bold text-slate-900 dark:text-white">Demanda
+                                            Recebida</span>
+                                        <span class="text-xs font-medium text-slate-500">24 Out 2023</span>
+                                    </div>
+                                    <p
+                                        class="text-sm text-slate-600 dark:text-slate-400 mt-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+                                        Sua solicitação foi registrada com sucesso e encaminhada para a triagem técnica.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-primary/20 text-primary">
+                                    <span class="relative flex h-3 w-3">
+                                        <span
+                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                                    </span>
+                                </span>
+                                <div class="flex flex-col gap-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-base font-bold text-primary">Em Análise Técnica</span>
+                                        <span class="text-xs font-medium text-primary">Em progresso</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+                                        A equipe técnica está avaliando a viabilidade orçamentária e técnica da
+                                        solicitação junto à Secretaria de Obras.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-100 dark:bg-slate-800 text-slate-400">
+                                    <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                                </span>
+                                <div class="flex flex-col gap-1 opacity-50">
+                                    <span class="text-base font-bold text-slate-700 dark:text-slate-400">Encaminhado ao
+                                        Executivo</span>
+                                    <span class="text-xs text-slate-500">Aguardando fase anterior</span>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-100 dark:bg-slate-800 text-slate-400">
+                                    <span class="material-symbols-outlined text-[14px]">task_alt</span>
+                                </span>
+                                <div class="flex flex-col gap-1 opacity-50">
+                                    <span class="text-base font-bold text-slate-700 dark:text-slate-400">Conclusão e
+                                        Resposta</span>
+                                    <span class="text-xs text-slate-500">Aguardando</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

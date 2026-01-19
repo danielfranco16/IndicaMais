@@ -1,0 +1,182 @@
+{% extends 'base_home.html' %}
+
+{% block title %}MINHAS DE INDICAÇÕES{% endblock %}
+
+
+
+{% block content %}
+
+<main class="layout-container flex h-full grow flex-col">
+    <div class="px-6 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-8">
+        <div class="layout-content-container flex flex-col max-w-[1200px] flex-1 w-full gap-8">
+            <div class="flex flex-wrap justify-between items-center gap-4">
+                <div class="flex min-w-72 flex-col gap-1">
+                    <h1 class="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">Minhas Indicações</h1>
+                    <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal">Acompanhe andamento das suas solicitações ao executivo.</p>
+                </div>
+                <a href="{% url 'cadastro_indicacao' %}"
+                    class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-all shadow-sm shadow-primary/30">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                    <span class="hidden lg:inline">Nova Indicação</span>
+                </a>
+            </div>
+            
+            <div
+                class="bg-white dark:bg-[#1e2530] rounded-xl border border-[#dbdfe6] dark:border-gray-700 p-5 shadow-sm">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <div class="relative flex w-full items-center">
+                            <span class="absolute left-4 text-[#616f89] material-symbols-outlined">search</span>
+                            <input
+                                class="form-input flex w-full rounded-lg text-[#111318] dark:text-white dark:bg-[#1a202c] focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] dark:border-gray-600 h-11 pl-12 pr-4 text-sm font-normal leading-normal placeholder:text-[#9ca3af]"
+                                placeholder="Buscar por título ou protocolo de sua indicação..." value="" />
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="flex items-center gap-2 text-sm text-[#616f89] dark:text-gray-400 font-medium mr-1">
+                            <span class="material-symbols-outlined !text-[18px]">filter_alt</span>
+                            Filtros:
+                        </div>
+                        <div class="relative group">
+                            <select
+                                class="appearance-none bg-white dark:bg-[#1a202c] border border-[#dbdfe6] dark:border-gray-600 rounded-lg h-11 pl-4 pr-10 text-sm font-medium text-[#111318] dark:text-gray-200 focus:ring-primary focus:border-primary transition-all">
+                                <option>Todas Categorias</option>
+                                <option>Infraestrutura</option>
+                                <option>Saúde</option>
+                                <option>Educação</option>
+                                <option>Segurança</option>
+                                <option>Trânsito</option>
+                            </select>
+                            <span
+                                class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none material-symbols-outlined text-[#616f89] !text-[20px]">expand_more</span>
+                        </div>
+                        <div class="relative group">
+                            <select
+                                class="appearance-none bg-white dark:bg-[#1a202c] border border-[#dbdfe6] dark:border-gray-600 rounded-lg h-11 pl-4 pr-10 text-sm font-medium text-[#111318] dark:text-gray-200 focus:ring-primary focus:border-primary transition-all">
+                                <option>Todos Status</option>
+                                <option>Pendente</option>
+                                <option>Em Análise</option>
+                                <option>Aprovada</option>
+                                <option>Concluída</option>
+                            </select>
+                            <span
+                                class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none material-symbols-outlined text-[#616f89] !text-[20px]">expand_more</span>
+                        </div>
+                        <button class="text-primary text-sm font-medium hover:underline px-2">
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="flex flex-col overflow-hidden rounded-xl border border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-[#1e2530] shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 dark:bg-[#252b36] border-b border-[#dbdfe6] dark:border-gray-700">
+                                <th
+                                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#616f89] dark:text-gray-400 w-[40%] min-w-[320px]">
+                                    Título / Protocolo</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#616f89] dark:text-gray-400 w-[15%]">
+                                    Categoria</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#616f89] dark:text-gray-400 w-[12%]">
+                                    Prioridade</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#616f89] dark:text-gray-400 w-[15%]">
+                                    Status</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#616f89] dark:text-gray-400 w-[14%] text-right">
+                                    Data de Envio</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#616f89] dark:text-gray-400 w-[4%] text-center">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#dbdfe6] dark:divide-gray-700">
+                            <tr class="group hover:bg-primary/[0.02] dark:hover:bg-[#252b36] transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-col gap-1">
+                                        <a href="{% url 'detalhar_indicacao' %}" class="text-[#111318] dark:text-white font-semibold text-sm">Instalação de
+                                            semáforo na Av. Brasil</span>
+                                        <span class="text-primary text-[11px] font-mono font-bold">2023-1102</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400">
+                                        Trânsito
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-2 w-2 rounded-full bg-red-500"></div>
+                                        <span class="text-sm text-[#111318] dark:text-gray-200">Alta</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-black bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-500 border border-blue-200 dark:border-blue-900/50 uppercase">
+                                        Em Análise
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span
+                                        class="text-sm text-[#616f89] dark:text-gray-400 tabular-nums">15/11/2023</span>
+                                </td>
+                            </tr>
+
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div
+                    class="flex items-center justify-between border-t border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-[#1e2530] px-6 py-4">
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-[#616f89] dark:text-gray-400">
+                                Mostrando <span class="font-bold text-[#111318] dark:text-white">1</span> a <span
+                                    class="font-bold text-[#111318] dark:text-white">10</span> de <span
+                                    class="font-bold text-[#111318] dark:text-white">128</span> indicações
+                            </p>
+                        </div>
+                        <div>
+                            <nav aria-label="Pagination"
+                                class="isolate inline-flex -space-x-px rounded-lg shadow-sm border border-[#dbdfe6] dark:border-gray-700 overflow-hidden">
+                                <a class="relative inline-flex items-center px-3 py-2 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined !text-[20px]">chevron_left</span>
+                                </a>
+                                <a aria-current="page"
+                                    class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-bold text-white focus:z-20"
+                                    href="#">1</a>
+                                <a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#111318] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    href="#">2</a>
+                                <a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#111318] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    href="#">3</a>
+                                <span
+                                    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#616f89] dark:text-gray-500">...</span>
+                                <a class="relative inline-flex items-center px-3 py-2 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined !text-[20px]">chevron_right</span>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
+                <span class="material-symbols-outlined text-primary !text-[24px]">info</span>
+                <p class="text-sm text-[#111318] dark:text-gray-300 leading-relaxed">
+                    <strong>Dica Legislativa:</strong> As indicações aprovadas são enviadas automaticamente para o
+                    Executivo Municipal. Você pode anexar fotos e documentos ao detalhar uma nova indicação para
+                    fortalecer seu pedido.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

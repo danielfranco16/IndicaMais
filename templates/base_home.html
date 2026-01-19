@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+
+<!-- Header -->
+
+
+{% if user.is_authenticated and user.groups.all %}
+{% for group in user.groups.all %}
+{% if group.name == 'vereador' %}
+<header
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-[#2e3440] bg-white dark:bg-[#1a202c] px-10 py-3">
+    <div class="flex items-center gap-4 text-[#111318] dark:text-white">
+        <div class="size-8 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-3xl">account_balance</span>
+        </div>
+        <a href="{% url 'home' %}">
+            <h2 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Indica +
+            </h2>
+        </a>
+    </div>
+    <div class="hidden md:flex flex-1 justify-end gap-8">
+        <div class="flex items-center gap-9">
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'home' %}">Meu Gabinete</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'lista_indicacoes_vereador' %}">Minhas Indicações</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'perfil_usuario' %}">Perfil</a>
+        </div>
+
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-bold leading-normal tracking-[0.015em]"
+            type="submit">Sair</button>
+        </form>
+
+    </div>
+    <div class="md:hidden">
+        <button class="text-[#111318] dark:text-white p-2">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+</header>
+
+{% elif group.name == 'funcionario_camara' %}
+
+<header
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-[#2e3440] bg-white dark:bg-[#1a202c] px-10 py-3">
+    <div class="flex items-center gap-4 text-[#111318] dark:text-white">
+        <div class="size-8 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-3xl">account_balance</span>
+        </div>
+        <a href="{% url 'home' %}">
+            <h2 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Indica +
+            </h2>
+        </a>
+    </div>
+    <div class="hidden md:flex flex-1 justify-end gap-8">
+        <div class="flex items-center gap-9">
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'home' %}">Início</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'lista_indicacoes_camara' %}">Indicações</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'perfil_usuario' %}">Perfil</a>
+        </div>
+
+     <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-bold leading-normal tracking-[0.015em]"
+            type="submit">Sair</button>
+        </form>
+
+    </div>
+    <div class="md:hidden">
+        <button class="text-[#111318] dark:text-white p-2">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+</header>
+
+{% elif group.name == 'funcionario_prefeitura' %}
+
+<header
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-[#2e3440] bg-white dark:bg-[#1a202c] px-10 py-3">
+    <div class="flex items-center gap-4 text-[#111318] dark:text-white">
+        <div class="size-8 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-3xl">account_balance</span>
+        </div>
+        <a href="{% url 'home' %}">
+            <h2 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Indica +
+            </h2>
+        </a>
+    </div>
+    <div class="hidden md:flex flex-1 justify-end gap-8">
+        <div class="flex items-center gap-9">
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'home' %}">Início</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'lista_indicacoes_prefeitura' %}">Indicações Recebidas</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="{% url 'perfil_usuario' %}">Perfil</a>
+        </div>
+
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-bold leading-normal tracking-[0.015em]"
+            type="submit">Sair</button>
+        </form>
+
+    </div>
+    <div class="md:hidden">
+        <button class="text-[#111318] dark:text-white p-2">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+</header>
+
+
+
+{% endif %}
+{% endfor %}
+
+{% else %}
+
+<header
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-[#2e3440] bg-white dark:bg-[#1a202c] px-10 py-3">
+    <div class="flex items-center gap-4 text-[#111318] dark:text-white">
+        <div class="size-8 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-3xl">account_balance</span>
+        </div>
+        <a href="{% url 'home' %}">
+            <h2 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Indica +
+            </h2>
+        </a>
+    </div>
+    <div class="hidden md:flex flex-1 justify-end gap-8">
+        <div class="flex items-center gap-9">
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="#como-funciona">Como Funciona</a>
+            <a class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="#protocolo">Transparência</a>
+        </div>
+
+        <a href="{% url 'login' %}"
+            class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-bold leading-normal tracking-[0.015em]">
+            <span class="truncate">Entrar</span>
+        </a>
+
+    </div>
+    <div class="md:hidden">
+        <button class="text-[#111318] dark:text-white p-2">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+</header>
+
+
+{% endif %}
+
+{% block content %}
+
+
+{% endblock %}
+
+<!-- Footer -->
+
+{% if user.is_authenticated %}
+
+<footer class="bg-white dark:bg-[#1a202c] pt-16 pb-8 border-t border-[#f0f2f4] dark:border-[#2e3440]">
+    <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center">
+        <div class="flex flex-col max-w-[1280px] w-full">
+            <div
+                class="border-t border-[#f0f2f4] dark:border-[#2e3440] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[#9aa2b1] dark:text-gray-500 text-xs font-normal">
+                    © 2026 Câmara Municipal de Itagimirim Todos os direitos reservados.
+                </p>
+                <div class="flex gap-6">
+                    <a class="text-[#9aa2b1] dark:text-gray-500 hover:text-primary text-xs" href="#">Termos de
+                        Uso</a>
+                    <a class="text-[#9aa2b1] dark:text-gray-500 hover:text-primary text-xs" href="#">Política de
+                        Privacidade</a>
+                    <a href="https://www.linkedin.com/in/daniel-franco-913a33190" target="_blank"
+                        class="text-[#9aa2b1] dark:text-gray-500 hover:text-primary text-xs" href="#">Desenvolvido por
+                        Daniel Franco</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% else %}
+<footer class="bg-white dark:bg-[#1a202c] pt-16 pb-8 border-t border-[#f0f2f4] dark:border-[#2e3440]">
+    <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center">
+        <div class="flex flex-col max-w-[1280px] w-full">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Logo & About -->
+                <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                    <div class="flex items-center gap-3 text-[#111318] dark:text-white">
+                        <div class="size-6 text-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined text-2xl">account_balance</span>
+                        </div>
+                        <h2 class="text-xl font-bold tracking-[-0.015em]">Câmara de Vereadores de Itagimirim</h2>
+                    </div>
+                    <p class="text-[#616f89] dark:text-gray-400 text-sm leading-relaxed max-w-[360px]">
+                        Conectando cidadãos aos seus representantes. Um sistema moderno para gestão de demandas
+                        legislativas, promovendo transparência e eficiência.
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div class="flex flex-col gap-4">
+                    <h3 class="text-[#111318] dark:text-white font-bold text-base">Acesso Rápido</h3>
+                    <div class="flex flex-col gap-2">
+                        <a class="text-[#616f89] dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-sm"
+                            href="{% url 'registro_demandas' %}">Registrar Demanda</a>
+                        <a class="text-[#616f89] dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-sm"
+                            href="{% url 'acompanhamento_demandas' %}">Consultar Protocolo</a>
+                        <a class="text-[#616f89] dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-sm"
+                            href="#">Portal da Transparência</a>
+                        <a class="text-[#616f89] dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-sm"
+                            href="#">Lista de Vereadores</a>
+                    </div>
+                </div>
+                <!-- Contact -->
+                <div class="flex flex-col gap-4">
+                    <h3 class="text-[#111318] dark:text-white font-bold text-base">Contato</h3>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-2 text-[#616f89] dark:text-gray-400 text-sm">
+                            <span class="material-symbols-outlined text-lg">call</span>
+                            <span>(11) 3333-4444</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[#616f89] dark:text-gray-400 text-sm">
+                            <span class="material-symbols-outlined text-lg">mail</span>
+                            <span>contato@camara.gov.br</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[#616f89] dark:text-gray-400 text-sm">
+                            <span class="material-symbols-outlined text-lg">distance</span>
+                            <span>Endereço: Rua Santos Dumont, 12 - Centro, Itagimirim - BA, 45850-000</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[#616f89] dark:text-gray-400 text-sm">
+                            <span class="material-symbols-outlined text-lg">schedule</span>
+                            <span>Seg-Sex: 08h às 18h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-[#f0f2f4] dark:border-[#2e3440] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[#9aa2b1] dark:text-gray-500 text-xs font-normal">
+                    © 2026 Câmara Municipal de Itagimirim Todos os direitos reservados.
+                </p>
+                <div class="flex gap-6">
+                    <a class="text-[#9aa2b1] dark:text-gray-500 hover:text-primary text-xs" href="#">Termos de
+                        Uso</a>
+                    <a class="text-[#9aa2b1] dark:text-gray-500 hover:text-primary text-xs" href="#">Política de
+                        Privacidade</a>
+                    <a href="https://www.linkedin.com/in/daniel-franco-913a33190" target="_blank"
+                        class="text-[#9aa2b1] dark:text-gray-500 hover:text-primary text-xs" href="#">Desenvolvido por
+                        Daniel Franco</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endif %}
+
+</html>

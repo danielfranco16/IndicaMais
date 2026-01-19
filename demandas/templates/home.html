@@ -1,0 +1,174 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Indica +{% endblock %}
+
+{% block content %}
+
+<body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display">
+    <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+       
+        <!-- Hero Section -->
+        <div class="flex flex-col">
+            <div class="px-4 py-10 md:px-20 lg:px-40 flex flex-1 justify-center">
+                <div class="flex flex-col max-w-[1280px] flex-1">
+                    <div class="@container">
+                        <div class="flex flex-col gap-6 py-10 @[480px]:gap-8 @[864px]:flex-row-reverse items-center">
+                            <!-- Hero Image -->
+                            <div class="w-full @[864px]:w-1/2 flex justify-center @[864px]:justify-end">
+                                <div class="w-full aspect-[4/3] bg-center bg-no-repeat bg-cover rounded-xl shadow-lg"
+                                    data-alt="Happy citizens pointing at a city map in a sunny park"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADs00zAuADMMFI1NUKo98SdCWDGLszau1yjPhbw8JDrAytz3InSluW8YXaKPoead9MXm4tPw9ZanXnq21d3fU2YX_8H26jX0UlRvQ59FZJPn3mZwKLTiDz-YqJY3Q0Ks0mpiImu9ZJ8nkbTkhk5tuIe8rHsMs1TDFr4jcUQ3pUqlSOUQq9sOl1PPHVk8Ri8TVJmDI24hqGsIRNMOuKFdNq5aGCrjNRnvzjMvQU8S7vX3jngLZBt4wC1ZL6g0tS68bsG8BJsyWLakkH");'>
+                                </div>
+                            </div>
+                            <!-- Hero Content -->
+                            <div
+                                class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:w-1/2 @[864px]:pr-10">
+                                <div class="flex flex-col gap-4 text-left">
+                                    <h1
+                                        class="text-[#111318] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl lg:text-6xl">
+                                        Sua voz na Câmara Municipal começa aqui.
+                                    </h1>
+                                    <h2 class="text-[#616f89] dark:text-gray-300 text-lg font-normal leading-relaxed">
+                                        Envie suas sugestões e melhorias para o bairro diretamente para os vereadores.
+                                        Acompanhe o progresso e faça parte da mudança da nossa cidade.
+                                    </h2>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-4">
+                                    <button
+                                        class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] shadow-md shadow-primary/20">
+                                        <a href="{% url 'registro_demandas' %}" >Registrar Minha Demanda</a>
+                                    </button>
+                                    <button
+                                        class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white dark:bg-[#2e3440] border border-[#dbdfe6] dark:border-[#4b5563] text-[#111318] dark:text-white hover:bg-gray-50 dark:hover:bg-[#3b4252] transition-colors text-base font-bold leading-normal tracking-[0.015em]">
+                                        <span class="truncate">Saber Mais</span>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-[#616f89] dark:text-gray-400 mt-2">
+                                    <span class="material-symbols-outlined text-lg text-primary">verified_user</span>
+                                    <span>Sistema oficial da Câmara Legislativa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- How it Works / Features Section -->
+        <div class="bg-white dark:bg-[#1a202c] py-16" id="como-funciona">
+            <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center">
+                <div class="flex flex-col max-w-[1280px] flex-1">
+                    <div class="flex flex-col gap-10 @container">
+                        <div class="flex flex-col gap-4 items-center text-center">
+                            <h2 class="text-primary text-sm font-bold uppercase tracking-wider">Transparência e
+                                Agilidade</h2>
+                            <h1
+                                class="text-[#111318] dark:text-white tracking-tight text-[32px] font-bold leading-tight @[480px]:text-4xl max-w-[720px]">
+                                Do seu bairro para a prefeitura
+                            </h1>
+                            <p
+                                class="text-[#616f89] dark:text-gray-400 text-lg font-normal leading-normal max-w-[720px]">
+                                Entenda o caminho que sua solicitação percorre até ser atendida pelos órgãos
+                                responsáveis.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                            <!-- Step 1 -->
+                            <div
+                                class="flex flex-col gap-4 rounded-xl border border-[#dbdfe6] dark:border-[#2e3440] bg-background-light dark:bg-[#232936] p-8 hover:shadow-lg transition-shadow">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                                    <span class="material-symbols-outlined text-3xl">edit_document</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight">1. Você
+                                        envia a ideia</h2>
+                                    <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed">
+                                        Descreva o problema, adicione a localização e anexe fotos através do nosso
+                                        portal simplificado.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div
+                                class="flex flex-col gap-4 rounded-xl border border-[#dbdfe6] dark:border-[#2e3440] bg-background-light dark:bg-[#232936] p-8 hover:shadow-lg transition-shadow">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                                    <span class="material-symbols-outlined text-3xl">supervisor_account</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight">2.
+                                        Vereador analisa</h2>
+                                    <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed">
+                                        O gabinete do vereador avalia a pertinência, transforma em indicação oficial e
+                                        encaminha.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div
+                                class="flex flex-col gap-4 rounded-xl border border-[#dbdfe6] dark:border-[#2e3440] bg-background-light dark:bg-[#232936] p-8 hover:shadow-lg transition-shadow">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                                    <span class="material-symbols-outlined text-3xl">location_city</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-[#111318] dark:text-white text-xl font-bold leading-tight">3.
+                                        Prefeitura executa</h2>
+                                    <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-relaxed">
+                                        A prefeitura recebe a documentação, agenda e realiza a execução do serviço no
+                                        seu bairro.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Protocol Check / CTA Section -->
+        <div class="bg-primary/5 dark:bg-[#151a23] py-20 border-y border-[#e5e7eb] dark:border-[#2e3440]" id="protocolo">
+            <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center">
+                <div class="flex flex-col max-w-[960px] flex-1">
+                    <div class="@container">
+                        <div class="flex flex-col items-center justify-center gap-8 text-center">
+                            <div class="flex flex-col gap-4">
+                                <h1
+                                    class="text-[#111318] dark:text-white tracking-tight text-[32px] font-bold leading-tight @[480px]:text-4xl max-w-[720px]">
+                                    Já tem um protocolo?
+                                </h1>
+                                <p
+                                    class="text-[#616f89] dark:text-gray-400 text-lg font-normal leading-normal max-w-[600px] mx-auto">
+                                    Acompanhe em tempo real o andamento da sua solicitação. Digite o código do protocolo
+                                    recebido no momento do cadastro.
+                                </p>
+                            </div>
+                            <div class="w-full max-w-[560px]">
+                                <label class="flex flex-col w-full">
+                                    <div
+                                        class="flex w-full flex-col sm:flex-row items-stretch rounded-lg shadow-sm gap-2 sm:gap-0">
+                                        <div class="relative flex-1">
+                                            <div
+                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="material-symbols-outlined text-gray-400">search</span>
+                                            </div>
+                                            <input
+                                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg sm:rounded-r-none border border-[#dbdfe6] dark:border-[#4b5563] bg-white dark:bg-[#1a202c] text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary h-14 pl-10 pr-4 text-base font-normal leading-normal placeholder:text-[#9aa2b1]"
+                                                placeholder="Ex: 2023/00156" value="" />
+                                        </div>
+                                        <button
+                                            class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg sm:rounded-l-none h-14 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] shadow-sm">
+                                            <span class="truncate">Consultar Status</span>
+                                        </button>
+                                    </div>
+                                    <p class="text-left text-xs text-[#616f89] dark:text-gray-500 mt-2 pl-1">
+                                        * O código do protocolo foi enviado para seu e-mail.
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base_home.html' %}
+
+{% block title %}HOME DE CAMARA{% endblock %}
+
+{% block content %}
+
+<h1>HOME de CAMARA</h1>
+
+{% if user.is_authenticated %}
+    <p>Bem-vindo, {{ user.username }}!</p>
+    <p>grupo de usuário: {{ user.groups.all|join:", " }}</p>
+{% else %}
+    <p>Você não está logado. <a href="{% url 'login' %}">Faça login aqui</a>.</p>
+{% endif %}
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Sair</button>
+</form>
+
+{% endblock %}

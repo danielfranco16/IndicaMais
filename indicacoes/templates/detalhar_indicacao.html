@@ -1,0 +1,214 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Indicação{% endblock %}
+
+{% block content %}
+<main class="flex-1 w-full max-w-[1200px] mx-auto p-6 md:p-8">
+    <nav aria-label="Breadcrumb" class="flex mb-6">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+                <a class="inline-flex items-center text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white"
+                    href="#">
+                    <span class="material-symbols-outlined text-[18px] mr-2">home</span>
+                    Home
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <span
+                        class="material-symbols-outlined text-text-secondary dark:text-gray-500 text-[18px]">chevron_right</span>
+                    <a class="ml-1 text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white md:ml-2"
+                        href="#">Indicações</a>
+                </div>
+            </li>
+            <li aria-current="page">
+                <div class="flex items-center">
+                    <span
+                        class="material-symbols-outlined text-text-secondary dark:text-gray-500 text-[18px]">chevron_right</span>
+                    <span class="ml-1 text-sm font-medium text-text-main dark:text-white md:ml-2">Detalhes</span>
+                </div>
+            </li>
+        </ol>
+    </nav>
+    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+        <div class="flex flex-col gap-3">
+            <div class="flex flex-wrap items-center gap-3">
+                <span
+                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800 uppercase tracking-wider">
+                    Aprovada
+                </span>
+                <span class="text-text-secondary text-sm">Protocolo: #2024-0842</span>
+            </div>
+            <h2 class="text-3xl font-bold tracking-tight text-text-main dark:text-white max-w-2xl leading-tight">
+                Manutenção da iluminação pública e poda de árvores no Bairro Residencial Centro</h2>
+        </div>
+        <div class="flex gap-3 shrink-0">
+            <button
+                class="px-5 py-2.5 rounded-lg border border-border-light dark:border-border-dark text-text-main dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-surface-dark/50 transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                Imprimir PDF
+            </button>
+            <button
+                class="px-5 py-2.5 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover shadow-sm shadow-primary/30 flex items-center gap-2 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">edit</span>
+                Editar
+            </button>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-8">
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden shadow-sm">
+                <div class="p-6 md:p-8">
+                    <h3 class="text-lg font-bold text-text-main dark:text-white mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">description</span>
+                        Descrição Detalhada
+                    </h3>
+                    <div
+                        class="prose prose-slate dark:prose-invert max-w-none text-text-main dark:text-gray-300 leading-relaxed space-y-4">
+                        <p>Venho por meio desta indicação solicitar ao Poder Executivo Municipal, através da Secretaria
+                            de Obras e Serviços Urbanos, a realização de manutenção preventiva e corretiva em todo o
+                            sistema de iluminação pública das ruas localizadas no entorno da Praça Central.</p>
+                        <p>Justifica-se o pedido devido ao elevado número de lâmpadas queimadas, o que tem gerado
+                            insegurança aos moradores e transeuntes no período noturno. Além disso, as árvores da
+                            localidade necessitam de poda, pois os galhos estão obstruindo a luminosidade das luminárias
+                            que ainda funcionam, criando pontos cegos.</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Substituição de 12 lâmpadas de vapor de sódio por LED;</li>
+                            <li>Poda de 8 árvores de grande porte;</li>
+                            <li>Revisão do cabeamento na Rua das Flores.</li>
+                        </ul>
+                        <p>A medida visa garantir o bem-estar da população e prevenir a ocorrência de delitos
+                            facilitados pela escuridão.</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm">
+                <h3 class="text-lg font-bold text-text-main dark:text-white mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">attach_file</span>
+                    Arquivos Anexos
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div
+                        class="flex items-center p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-background-dark/50 cursor-pointer transition-colors group">
+                        <div class="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 rounded mr-3">
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-text-main dark:text-white truncate">
+                                relatorio_tecnico_iluminacao.pdf</p>
+                            <p class="text-xs text-text-secondary">2.4 MB</p>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+                    </div>
+                    <div
+                        class="flex items-center p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-background-dark/50 cursor-pointer transition-colors group">
+                        <div class="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded mr-3">
+                            <span class="material-symbols-outlined">image</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-text-main dark:text-white truncate">foto_local_noite.jpg
+                            </p>
+                            <p class="text-xs text-text-secondary">1.8 MB</p>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lg:col-span-1 space-y-6">
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+                <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Autoria</h3>
+                <div class="flex items-center gap-4">
+                    <img alt="Foto do Vereador" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbloFwmqzFot8bOMDdOGOAaA61bS3DvPbHaG8EphKNnf1DVh7rDPw0OovtNLGwjN8PLEWr_ac4pg-3EaWwuLswR0KjGpksx9nevRHafI3tcdpAYhT9IofHxkZBaiHbDpxqkNsxgmkp501ipaCZDmbnYhKFy9fIk1CL61LF551gqwTom_ojZBKT11kkUVEFuqasAZ00YqQ2LLLIbbDTAaG26HNGnO_TW6vOncaQLuBWb5fI8vl0YysssxotTJ9T4eJS_NCgUYnsnCxy" />
+                    <div>
+                        <p class="text-base font-bold text-text-main dark:text-white leading-tight">Carlos Silva</p>
+                        <p class="text-sm text-text-secondary">Vereador - Partido Liberal</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+                <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Classificação</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">calendar_today</span> Data
+                        </span>
+                        <span class="text-sm font-medium text-text-main dark:text-white">15 Mai, 2024</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">category</span> Categoria
+                        </span>
+                        <span class="text-sm font-medium text-text-main dark:text-white">Infraestrutura</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">priority_high</span> Prioridade
+                        </span>
+                        <span
+                            class="px-2 py-0.5 rounded text-[11px] font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300 uppercase">Alta</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+                <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-6">Tramitação</h3>
+                <div class="space-y-6">
+                    <div class="relative pl-8 timeline-item">
+                        <div
+                            class="absolute left-0 top-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center z-10 border-4 border-surface-light dark:border-surface-dark">
+                            <span class="material-symbols-outlined text-white text-[14px]">check</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-text-main dark:text-white">Recebido pela Prefeitura</p>
+                            <p class="text-xs text-text-secondary">22 Mai, 2024 • 14:30</p>
+                            <p class="text-xs mt-1 text-text-secondary italic">Aguardando cronograma de obras.</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-8 timeline-item">
+                        <div
+                            class="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10 border-4 border-surface-light dark:border-surface-dark">
+                            <span class="material-symbols-outlined text-white text-[14px]">gavel</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-text-main dark:text-white">Aprovada em Plenário</p>
+                            <p class="text-xs text-text-secondary">20 Mai, 2024 • 19:15</p>
+                        </div>
+                    </div>
+                    <div class="relative pl-8 timeline-item">
+                        <div
+                            class="absolute left-0 top-0 w-6 h-6 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center z-10 border-4 border-surface-light dark:border-surface-dark">
+                            <span class="material-symbols-outlined text-white text-[14px]">add</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-text-main dark:text-white">Indicação Criada</p>
+                            <p class="text-xs text-text-secondary">15 Mai, 2024 • 10:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 p-5">
+                <div class="flex gap-3">
+                    <span class="material-symbols-outlined text-primary shrink-0">info</span>
+                    <div>
+                        <h4 class="text-sm font-bold text-text-main dark:text-white mb-1">Próximos Passos</h4>
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação agora está em posse da Secretaria de Obras para análise de viabilidade técnica e
+                            financeira.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main> 
+
+
+{% endblock %}

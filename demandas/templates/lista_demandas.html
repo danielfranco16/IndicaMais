@@ -1,0 +1,425 @@
+{% extends 'base_home.html' %}
+
+{% block title %}LISTA DE DEMANDAS{% endblock %}
+
+
+
+{% block content %}
+<main class="flex-1 py-8 px-4 sm:px-6">
+    <div class="mx-auto max-w-7xl space-y-8">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div class="flex flex-col gap-2">
+                <h1 class="text-[#111318] dark:text-white text-3xl md:text-4xl font-black tracking-tight">Painel de
+                    Adoção de Demandas</h1>
+                <p class="text-[#616f89] dark:text-[#a0aec0] text-base md:text-lg max-w-2xl">
+                    Visualize e adote solicitações da comunidade para transformá-las em indicações legislativas formais.
+                </p>
+            </div>
+
+        </div>
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div
+                class="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#dbdfe6] dark:border-[#2d3748] shadow-sm flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                    <p class="text-[#616f89] dark:text-[#a0aec0] font-medium text-sm">Demandas Disponíveis</p>
+                    <span
+                        class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">inbox</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-[#111318] dark:text-white text-2xl font-bold">142</p>
+                    <p class="text-[#07883b] text-sm font-medium flex items-center"><span
+                            class="material-symbols-outlined text-[16px]">trending_up</span> +12%</p>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#dbdfe6] dark:border-[#2d3748] shadow-sm flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                    <p class="text-[#616f89] dark:text-[#a0aec0] font-medium text-sm">Urgência Alta</p>
+                    <span
+                        class="material-symbols-outlined text-red-600 bg-red-50 dark:bg-red-900/20 p-1 rounded-md text-[20px]">priority_high</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-[#111318] dark:text-white text-2xl font-bold">18</p>
+                    <p class="text-[#07883b] text-sm font-medium flex items-center"><span
+                            class="material-symbols-outlined text-[16px]">trending_up</span> +5%</p>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#dbdfe6] dark:border-[#2d3748] shadow-sm flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                    <p class="text-[#616f89] dark:text-[#a0aec0] font-medium text-sm">Novas Hoje</p>
+                    <span
+                        class="material-symbols-outlined text-blue-500 bg-blue-50 dark:bg-blue-900/20 p-1 rounded-md text-[20px]">new_releases</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-[#111318] dark:text-white text-2xl font-bold">24</p>
+                    <p class="text-[#616f89] dark:text-[#a0aec0] text-sm">vs. 19 ontem</p>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-[#1a202c] rounded-xl p-5 border border-[#dbdfe6] dark:border-[#2d3748] shadow-sm flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                    <p class="text-[#616f89] dark:text-[#a0aec0] font-medium text-sm">Minhas Adoções (Mês)</p>
+                    <span
+                        class="material-symbols-outlined text-purple-500 bg-purple-50 dark:bg-purple-900/20 p-1 rounded-md text-[20px]">assignment_turned_in</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <p class="text-[#111318] dark:text-white text-2xl font-bold">8</p>
+                    <p class="text-[#07883b] text-sm font-medium flex items-center"><span
+                            class="material-symbols-outlined text-[16px]">trending_up</span> +2</p>
+                </div>
+            </div>
+        </div>
+        <!-- Filters & Search Toolbar -->
+        <div class="bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] p-4 shadow-sm">
+            <div class="flex flex-col lg:flex-row gap-4">
+                <!-- Search -->
+                <div class="flex-1">
+                    <label
+                        class="block text-xs font-semibold text-[#616f89] dark:text-[#a0aec0] mb-1.5 uppercase tracking-wider">Buscar</label>
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#616f89]">search</span>
+                        <input
+                            class="w-full bg-[#f0f2f4] dark:bg-[#2d3748] border-none rounded-lg py-2.5 pl-10 pr-4 text-[#111318] dark:text-white placeholder:text-[#616f89] focus:ring-2 focus:ring-primary/50"
+                            placeholder="Palavra-chave, ID ou assunto..." type="text" />
+                    </div>
+                </div>
+                <!-- Filter Group -->
+                <div class="flex flex-col sm:flex-row gap-4 lg:w-2/3">
+                    <div class="flex-1">
+                        <label
+                            class="block text-xs font-semibold text-[#616f89] dark:text-[#a0aec0] mb-1.5 uppercase tracking-wider">Bairro</label>
+                        <div class="relative">
+                            <select
+                                class="w-full appearance-none bg-[#f0f2f4] dark:bg-[#2d3748] border-none rounded-lg py-2.5 pl-4 pr-10 text-[#111318] dark:text-white focus:ring-2 focus:ring-primary/50 cursor-pointer">
+                                <option>Todos os Bairros</option>
+                                <option>Centro</option>
+                                <option>Jardim América</option>
+                                <option>Vila Nova</option>
+                                <option>Industrial</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616f89] pointer-events-none text-[20px]">expand_more</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <label
+                            class="block text-xs font-semibold text-[#616f89] dark:text-[#a0aec0] mb-1.5 uppercase tracking-wider">Categoria</label>
+                        <div class="relative">
+                            <select
+                                class="w-full appearance-none bg-[#f0f2f4] dark:bg-[#2d3748] border-none rounded-lg py-2.5 pl-4 pr-10 text-[#111318] dark:text-white focus:ring-2 focus:ring-primary/50 cursor-pointer">
+                                <option>Todas as Categorias</option>
+                                <option>Infraestrutura e Obras</option>
+                                <option>Saúde</option>
+                                <option>Educação</option>
+                                <option>Segurança</option>
+                                <option>Trânsito</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616f89] pointer-events-none text-[20px]">expand_more</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <label
+                            class="block text-xs font-semibold text-[#616f89] dark:text-[#a0aec0] mb-1.5 uppercase tracking-wider">Urgência</label>
+                        <div class="relative">
+                            <select
+                                class="w-full appearance-none bg-[#f0f2f4] dark:bg-[#2d3748] border-none rounded-lg py-2.5 pl-4 pr-10 text-[#111318] dark:text-white focus:ring-2 focus:ring-primary/50 cursor-pointer">
+                                <option>Qualquer Urgência</option>
+                                <option>Alta</option>
+                                <option>Média</option>
+                                <option>Baixa</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#616f89] pointer-events-none text-[20px]">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Demand Cards Grid -->
+        <div>
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-[#111318] dark:text-white">Resultados da Busca</h3>
+                <span class="text-sm text-[#616f89] dark:text-[#a0aec0]">Mostrando 6 de 142 demandas</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 (High Urgency) -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex-1 flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-red-100 dark:bg-red-900/40 px-2.5 py-1 text-xs font-bold text-red-700 dark:text-red-300">
+                                <span class="material-symbols-outlined text-[14px]">priority_high</span> Alta Urgência
+                            </span>
+                            <span class="text-xs font-medium text-[#616f89] dark:text-[#a0aec0]">#4921 • Há 2
+                                dias</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="text-lg font-bold text-[#111318] dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                                Buraco na Via Principal</h4>
+                            <p class="text-[#616f89] dark:text-[#a0aec0] text-sm line-clamp-3">Solicito reparo urgente
+                                na Rua das Flores, próximo ao número 120. O buraco tem aumentado com as chuvas recentes
+                                e já causou dois acidentes com motociclistas.</p>
+                        </div>
+                        <div class="mt-auto pt-4 flex flex-col gap-3">
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">location_on</span>
+                                <span class="font-medium">Bairro Centro</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">engineering</span>
+                                <span>Infraestrutura</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-5 py-4 border-t border-[#f0f2f4] dark:border-[#2d3748] bg-gray-50 dark:bg-[#1a202c]/50 flex justify-between items-center">
+                        <button
+                            class="text-[#616f89] dark:text-[#a0aec0] text-sm font-medium hover:text-[#111318] dark:hover:text-white">Ver
+                            Detalhes</button>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Adotar
+                            Demanda</button>
+                    </div>
+                </div>
+                <!-- Card 2 (Medium Urgency) -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex-1 flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-yellow-100 dark:bg-yellow-900/40 px-2.5 py-1 text-xs font-bold text-yellow-800 dark:text-yellow-300">
+                                Média Urgência
+                            </span>
+                            <span class="text-xs font-medium text-[#616f89] dark:text-[#a0aec0]">#4918 • Há 3
+                                dias</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="text-lg font-bold text-[#111318] dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                                Falta de Medicamentos no Posto</h4>
+                            <p class="text-[#616f89] dark:text-[#a0aec0] text-sm line-clamp-3">A UBS do Jardim América
+                                está sem insulina há mais de uma semana. Diversos idosos estão sem o medicamento
+                                essencial.</p>
+                        </div>
+                        <div class="mt-auto pt-4 flex flex-col gap-3">
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">location_on</span>
+                                <span class="font-medium">Jardim América</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span
+                                    class="material-symbols-outlined text-[#616f89] text-[18px]">medical_services</span>
+                                <span>Saúde</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-5 py-4 border-t border-[#f0f2f4] dark:border-[#2d3748] bg-gray-50 dark:bg-[#1a202c]/50 flex justify-between items-center">
+                        <button
+                            class="text-[#616f89] dark:text-[#a0aec0] text-sm font-medium hover:text-[#111318] dark:hover:text-white">Ver
+                            Detalhes</button>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Adotar
+                            Demanda</button>
+                    </div>
+                </div>
+                <!-- Card 3 (Low Urgency) -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex-1 flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-green-100 dark:bg-green-900/40 px-2.5 py-1 text-xs font-bold text-green-800 dark:text-green-300">
+                                Baixa Urgência
+                            </span>
+                            <span class="text-xs font-medium text-[#616f89] dark:text-[#a0aec0]">#4892 • Há 5
+                                dias</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="text-lg font-bold text-[#111318] dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                                Poda de Árvore em Praça</h4>
+                            <p class="text-[#616f89] dark:text-[#a0aec0] text-sm line-clamp-3">Solicitação para poda
+                                preventiva das árvores na Praça da Matriz. Galhos estão baixos e atrapalham pedestres.
+                            </p>
+                        </div>
+                        <div class="mt-auto pt-4 flex flex-col gap-3">
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">location_on</span>
+                                <span class="font-medium">Vila Nova</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">park</span>
+                                <span>Meio Ambiente</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-5 py-4 border-t border-[#f0f2f4] dark:border-[#2d3748] bg-gray-50 dark:bg-[#1a202c]/50 flex justify-between items-center">
+                        <button
+                            class="text-[#616f89] dark:text-[#a0aec0] text-sm font-medium hover:text-[#111318] dark:hover:text-white">Ver
+                            Detalhes</button>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Adotar
+                            Demanda</button>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex-1 flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-red-100 dark:bg-red-900/40 px-2.5 py-1 text-xs font-bold text-red-700 dark:text-red-300">
+                                <span class="material-symbols-outlined text-[14px]">priority_high</span> Alta Urgência
+                            </span>
+                            <span class="text-xs font-medium text-[#616f89] dark:text-[#a0aec0]">#4888 • Há 6
+                                dias</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="text-lg font-bold text-[#111318] dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                                Semáforo Quebrado Cruzamento</h4>
+                            <p class="text-[#616f89] dark:text-[#a0aec0] text-sm line-clamp-3">O semáforo do cruzamento
+                                da Av. Brasil com a Rua 7 está intermitente. Risco grave de colisão nos horários de
+                                pico.</p>
+                        </div>
+                        <div class="mt-auto pt-4 flex flex-col gap-3">
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">location_on</span>
+                                <span class="font-medium">Centro</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">traffic</span>
+                                <span>Trânsito</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-5 py-4 border-t border-[#f0f2f4] dark:border-[#2d3748] bg-gray-50 dark:bg-[#1a202c]/50 flex justify-between items-center">
+                        <button
+                            class="text-[#616f89] dark:text-[#a0aec0] text-sm font-medium hover:text-[#111318] dark:hover:text-white">Ver
+                            Detalhes</button>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Adotar
+                            Demanda</button>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex-1 flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-yellow-100 dark:bg-yellow-900/40 px-2.5 py-1 text-xs font-bold text-yellow-800 dark:text-yellow-300">
+                                Média Urgência
+                            </span>
+                            <span class="text-xs font-medium text-[#616f89] dark:text-[#a0aec0]">#4850 • Há 1
+                                semana</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="text-lg font-bold text-[#111318] dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                                Limpeza de Terreno Baldio</h4>
+                            <p class="text-[#616f89] dark:text-[#a0aec0] text-sm line-clamp-3">Terreno na Rua das
+                                Palmeiras com acúmulo de lixo e mato alto, atraindo insetos e animais peçonhentos para
+                                as casas vizinhas.</p>
+                        </div>
+                        <div class="mt-auto pt-4 flex flex-col gap-3">
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">location_on</span>
+                                <span class="font-medium">Industrial</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span
+                                    class="material-symbols-outlined text-[#616f89] text-[18px]">cleaning_services</span>
+                                <span>Zeladoria</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-5 py-4 border-t border-[#f0f2f4] dark:border-[#2d3748] bg-gray-50 dark:bg-[#1a202c]/50 flex justify-between items-center">
+                        <button
+                            class="text-[#616f89] dark:text-[#a0aec0] text-sm font-medium hover:text-[#111318] dark:hover:text-white">Ver
+                            Detalhes</button>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Adotar
+                            Demanda</button>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-[#1a202c] rounded-xl border border-[#dbdfe6] dark:border-[#2d3748] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-5 flex-1 flex flex-col gap-3">
+                        <div class="flex justify-between items-start">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-blue-100 dark:bg-blue-900/40 px-2.5 py-1 text-xs font-bold text-blue-700 dark:text-blue-300">
+                                Sugestão
+                            </span>
+                            <span class="text-xs font-medium text-[#616f89] dark:text-[#a0aec0]">#4841 • Há 1
+                                semana</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="text-lg font-bold text-[#111318] dark:text-white mb-2 leading-snug group-hover:text-primary transition-colors">
+                                Melhoria na Iluminação Pública</h4>
+                            <p class="text-[#616f89] dark:text-[#a0aec0] text-sm line-clamp-3">Sugiro a troca das
+                                lâmpadas antigas por LED na avenida principal do bairro para aumentar a segurança
+                                noturna.</p>
+                        </div>
+                        <div class="mt-auto pt-4 flex flex-col gap-3">
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">location_on</span>
+                                <span class="font-medium">Vila Nova</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-[#111318] dark:text-white">
+                                <span class="material-symbols-outlined text-[#616f89] text-[18px]">lightbulb</span>
+                                <span>Iluminação</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-5 py-4 border-t border-[#f0f2f4] dark:border-[#2d3748] bg-gray-50 dark:bg-[#1a202c]/50 flex justify-between items-center">
+                        <button
+                            class="text-[#616f89] dark:text-[#a0aec0] text-sm font-medium hover:text-[#111318] dark:hover:text-white">Ver
+                            Detalhes</button>
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">Adotar
+                            Demanda</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-8 flex justify-center">
+                <nav aria-label="Pagination" class="flex items-center gap-2">
+                    <button
+                        class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#616f89] dark:text-[#a0aec0] hover:bg-gray-50 dark:hover:bg-[#2d3748]">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button
+                        class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white font-bold">1</button>
+                    <button
+                        class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#111318] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2d3748]">2</button>
+                    <button
+                        class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#111318] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2d3748]">3</button>
+                    <span class="px-2 text-[#616f89] dark:text-[#a0aec0]">...</span>
+                    <button
+                        class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#111318] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2d3748]">12</button>
+                    <button
+                        class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#616f89] dark:text-[#a0aec0] hover:bg-gray-50 dark:hover:bg-[#2d3748]">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

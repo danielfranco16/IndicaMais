@@ -1,0 +1,367 @@
+{% extends 'base_home.html' %}
+
+{% block title %}HOME DE VEREADOR{% endblock %}
+
+{% block content %}
+
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <header
+        class="h-16 bg-white dark:bg-slate-dark border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 sm:px-6 z-10">
+        <button
+            class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="hidden md:flex flex-1 max-w-md ml-4">
+            <div class="relative w-full">
+                <p class="dark:text-white tracking-tight">Seja bem-vindo, vereador <b>{{ user.first_name }} {{ user.last_name }}</b></p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+          
+            <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+            <div class="flex items-center gap-2">
+                <a href="{% url 'lista_demandas' %}"
+                    class="flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-semibold transition-all shadow-sm shadow-amber-500/30">
+                    <span class="material-symbols-outlined text-[20px]">handshake</span>
+                    <span class="hidden lg:inline">Adotar Demandas</span>
+                </a>
+                <a href="{% url 'cadastro_indicacao' %}"
+                    class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-all shadow-sm shadow-primary/30">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                    <span class="hidden lg:inline">Nova Indicação</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <div class="max-w-7xl mx-auto space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Dashboard
+                        Administrativo</h1>
+                    <p class="text-slate-500 dark:text-slate-400 mt-1">Visão geral do trâmite das indicações
+                        legislativas e demandas populares.</p>
+                </div>
+                <div
+                    class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                    <span>Últimos 30 dias</span>
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                <div
+                    class="bg-white dark:bg-slate-dark rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-primary">folder_open</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total de Indicações</p>
+                            <h3 class="text-3xl font-bold text-slate-900 dark:text-white mt-2">1,248</h3>
+                        </div>
+                        <div
+                            class="flex items-center mt-4 text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 w-fit px-2 py-1 rounded text-xs font-semibold">
+                            <span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+                            +5% este mês
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-dark rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-orange-500">schedule</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Indicações Pendentes</p>
+                            <h3 class="text-3xl font-bold text-slate-900 dark:text-white mt-2">45</h3>
+                        </div>
+                        <div
+                            class="flex items-center mt-4 text-orange-600 bg-orange-50 dark:bg-orange-900/20 w-fit px-2 py-1 rounded text-xs font-semibold">
+                            <span class="material-symbols-outlined text-[16px] mr-1">priority_high</span>
+                            Ação Necessária
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-dark rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-blue-400">search</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Em Análise</p>
+                            <h3 class="text-3xl font-bold text-slate-900 dark:text-white mt-2">12</h3>
+                        </div>
+                        <div
+                            class="flex items-center mt-4 text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 w-fit px-2 py-1 rounded text-xs font-semibold">
+                            <span class="material-symbols-outlined text-[16px] mr-1">remove</span>
+                            Estável
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-dark rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-7xl text-emerald-500">check_circle</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Indicações Concluídas</p>
+                            <h3 class="text-3xl font-bold text-slate-900 dark:text-white mt-2">1,191</h3>
+                        </div>
+                        <div
+                            class="flex items-center mt-4 text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 w-fit px-2 py-1 rounded text-xs font-semibold">
+                            <span class="material-symbols-outlined text-[16px] mr-1">done_all</span>
+                            Finalizados
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section
+                class="bg-white dark:bg-slate-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col overflow-hidden">
+                <div
+                    class="p-5 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-amber-500">campaign</span>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Demandas Recentes dos Cidadãos</h2>
+                    </div>
+                    <a class="text-sm font-semibold text-primary hover:underline flex items-center gap-1" href="#">
+                        Ver todas as demandas <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                    Cidadão</th>
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                    Bairro</th>
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Data
+                                </th>
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                    Assunto da Demanda</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">
+                                    Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                                            <span class="material-symbols-outlined text-sm">person</span>
+                                        </div>
+                                        <span class="text-sm font-semibold text-slate-900 dark:text-white">Ricardo
+                                            Mendes</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Jardim América</td>
+                                <td class="px-6 py-4 text-sm text-slate-500">24 Out, 2023</td>
+                                <td class="px-6 py-4">
+                                    <span class="text-sm text-slate-700 dark:text-slate-300 line-clamp-1">Vazamento de
+                                        água constante na Rua 15</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button
+                                        class="bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1 ml-auto">
+                                        <span class="material-symbols-outlined text-[16px]">visibility</span>
+                                        Ver Detalhes
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                                            <span class="material-symbols-outlined text-sm">person</span>
+                                        </div>
+                                        <span class="text-sm font-semibold text-slate-900 dark:text-white">Fernanda
+                                            Oliveira</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Vila Nova</td>
+                                <td class="px-6 py-4 text-sm text-slate-500">23 Out, 2023</td>
+                                <td class="px-6 py-4">
+                                    <span class="text-sm text-slate-700 dark:text-slate-300 line-clamp-1">Necessidade de
+                                        redutor de velocidade</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button
+                                        class="bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1 ml-auto">
+                                        <span class="material-symbols-outlined text-[16px]">visibility</span>
+                                        Ver Detalhes
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                                            <span class="material-symbols-outlined text-sm">person</span>
+                                        </div>
+                                        <span class="text-sm font-semibold text-slate-900 dark:text-white">Paulo
+                                            Santos</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Centro</td>
+                                <td class="px-6 py-4 text-sm text-slate-500">23 Out, 2023</td>
+                                <td class="px-6 py-4">
+                                    <span class="text-sm text-slate-700 dark:text-slate-300 line-clamp-1">Podagem de
+                                        árvores na Praça Central</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button
+                                        class="bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1 ml-auto">
+                                        <span class="material-symbols-outlined text-[16px]">visibility</span>
+                                        Ver Detalhes
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <div
+                class="bg-white dark:bg-slate-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col overflow-hidden">
+                <div
+                    class="p-5 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <h2 class="text-lg font-bold text-slate-900 dark:text-white">Indicações Recentes</h2>
+                    <div class="flex items-center gap-2">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                                <span class="material-symbols-outlined text-slate-400 text-[18px]">filter_list</span>
+                            </span>
+                            <select
+                                class="form-select pl-9 pr-8 py-2 text-sm border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-white focus:ring-primary focus:border-primary">
+                                <option>Todos os Status</option>
+                                <option>Pendente</option>
+                                <option>Em Análise</option>
+                                <option>Concluído</option>
+                            </select>
+                        </div>
+                        <button
+                            class="p-2 text-slate-500 hover:text-primary hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                            <span class="material-symbols-outlined">download</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
+                                <th
+                                    class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider w-1/3">
+                                    Título da Indicação</th>
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                    Vereador Responsável</th>
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Data
+                                </th>
+                                <th class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                    Status</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">
+                                    Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-sm font-semibold text-slate-900 dark:text-white line-clamp-1">Pavimentação
+                                            da Rua das Flores - Bairro Centro</span>
+                                        <span class="text-xs text-slate-500 mt-0.5">IND-2023-8492</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-6 w-6 rounded-full bg-slate-200 bg-cover bg-center"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPAt7ZkZn9qIGiz_iuoKoIyP4MfRzq0pPulxJL72_eaj9YCRXeRzbWsztWZ9KmJ8osxRKvDJVtx8FcC9U5r4ojziTG8OPsAceGiv-cDyen9HA-alstQIGfjETt8yo1uYcr41-AivV11bC0i-6tJDEKYvYSe2u0cM1g_xB2ln_ML1x7hgCAxAMj4mB5XpQDGIfPCLRQAgz_VJUCta5Pw0PVPTpX9EySmprsGEdPVrjms-iutS-gB2PuQyjjjWQOuqR1N-ai_8WF04d7");'>
+                                        </div>
+                                        <span class="text-sm text-slate-700 dark:text-slate-300">Ver. João Silva</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-500">23 Out, 2023</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 mr-1.5"></span>
+                                        Pendente
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-slate-400 hover:text-primary transition-colors p-1">
+                                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-sm font-semibold text-slate-900 dark:text-white line-clamp-1">Reforma
+                                            da Escola Municipal Santos Dumont</span>
+                                        <span class="text-xs text-slate-500 mt-0.5">IND-2023-8491</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="h-6 w-6 rounded-full bg-slate-200 bg-cover bg-center"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDkFGbFDAo8cM6zmn5YjKByg6rtI1kJveE2UzfaUTw33t4j55CXuYDrBqc7yeT3dcJUadWV_zXEXc_JG3LyzqQHCElU60K4_wBh1q1z4qv3CJ_f6uXY97hKJKEXMdPm6a0Hn86lL6Fswd50S3RxdZn4Ixupt4h1-olX1BGwpGEtYCp2ny3ExgMqNSWYrbmKAeZdQO-vHlfvOylfq2hWg8K0ukqqlw08GBh_xR1HpOsa5STv2Ckkwz-Xs4K7iNsGpIHOTC2jD6eDRzdu");'>
+                                        </div>
+                                        <span class="text-sm text-slate-700 dark:text-slate-300">Ver. Maria Souza</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-500">22 Out, 2023</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span>
+                                        Em Análise
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-slate-400 hover:text-primary transition-colors p-1">
+                                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        Mostrando <span class="font-medium text-slate-900 dark:text-white">1</span> a <span
+                            class="font-medium text-slate-900 dark:text-white">5</span> de <span
+                            class="font-medium text-slate-900 dark:text-white">45</span> resultados
+                    </p>
+                    <nav class="flex items-center gap-1">
+                        <button
+                            class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                            disabled="">
+                            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                        </button>
+                        <button
+                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-primary text-white text-sm font-medium shadow-sm shadow-primary/30">1</button>
+                        <button
+                            class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">2</button>
+                        <button
+                            class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
