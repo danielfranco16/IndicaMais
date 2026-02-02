@@ -127,7 +127,7 @@ python manage.py runserver
 | `/redirect/` | Rota de redirecionamento interno do sistema |
 
 
-## 📝 Local 
+## 📝 Licença  
 
 MIT License © Daniel Messias Franco dos Santos
 
