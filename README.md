@@ -97,10 +97,8 @@ DATABASES = {
     }
 }
 
-
-
 ## 🔄 Executar Migrações 
-python manage.py makemigrations
+python manage.py makemigrations  
 python manage.py migrate
 
 
@@ -109,6 +107,24 @@ python manage.py createsuperuser
 
 ## ▶️ Executar Servidor Local 
 python manage.py runserver
+
+
+
+## 🚦 Rotas do Sistema 
+
+| Rota | Descrição |
+|------|-----------|
+| `/admin/` | Interface administrativa do Django |
+| `/` |  Página inicial / Landing Page |
+| `/registro-demandas/` | Cadastro de novas demandas pelo usuário cidadão |
+| `/busca/` | Busca de demandas pelo protocolo |
+| `/busca_protocolo/<str:protocolo>/` | Acompanhamento detalhado de uma demanda específica |
+| `/lista-demandas/` | Listagem de todas as demandas registradas |
+| `/indicacoes/` | Acesso ao módulo de indicações |
+| `/legislativo/` | Acesso ao painel do Legislativo |
+| `/executivo/` | Acesso ao painel do Executivo |
+| `/accounts/` | Rotas de autenticação e gerenciamento de usuários |
+| `/redirect/` | Rota de redirecionamento interno do sistema |
 
 
 ## 📝 Local 
