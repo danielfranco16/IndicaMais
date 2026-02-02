@@ -6,7 +6,7 @@
 
 <body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display">
     <div class="relative flex min-h-screen flex-col overflow-x-hidden">
-       
+
         <!-- Hero Section -->
         <div class="flex flex-col">
             <div class="px-4 py-10 md:px-20 lg:px-40 flex flex-1 justify-center">
@@ -36,7 +36,7 @@
                                 <div class="flex flex-col sm:flex-row gap-4">
                                     <button
                                         class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] shadow-md shadow-primary/20">
-                                        <a href="{% url 'registro_demandas' %}" >Registrar Minha Demanda</a>
+                                        <a href="{% url 'registro_demandas' %}">Registrar Minha Demanda</a>
                                     </button>
                                     <button
                                         class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white dark:bg-[#2e3440] border border-[#dbdfe6] dark:border-[#4b5563] text-[#111318] dark:text-white hover:bg-gray-50 dark:hover:bg-[#3b4252] transition-colors text-base font-bold leading-normal tracking-[0.015em]">
@@ -126,7 +126,8 @@
             </div>
         </div>
         <!-- Protocol Check / CTA Section -->
-        <div class="bg-primary/5 dark:bg-[#151a23] py-20 border-y border-[#e5e7eb] dark:border-[#2e3440]" id="protocolo">
+        <div class="bg-primary/5 dark:bg-[#151a23] py-20 border-y border-[#e5e7eb] dark:border-[#2e3440]"
+            id="protocolo">
             <div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center">
                 <div class="flex flex-col max-w-[960px] flex-1">
                     <div class="@container">
@@ -144,31 +145,23 @@
                             </div>
                             <div class="w-full max-w-[560px]">
                                 <label class="flex flex-col w-full">
-                                    <div
-                                        class="flex w-full flex-col sm:flex-row items-stretch rounded-lg shadow-sm gap-2 sm:gap-0">
-                                        <div class="relative flex-1">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <span class="material-symbols-outlined text-gray-400">search</span>
-                                            </div>
-                                            <input
-                                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg sm:rounded-r-none border border-[#dbdfe6] dark:border-[#4b5563] bg-white dark:bg-[#1a202c] text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 focus:border-primary h-14 pl-10 pr-4 text-base font-normal leading-normal placeholder:text-[#9aa2b1]"
-                                                placeholder="Ex: 2023/00156" value="" />
-                                        </div>
-                                        <button
-                                            class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg sm:rounded-l-none h-14 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] shadow-sm">
-                                            <span class="truncate">Consultar Status</span>
-                                        </button>
-                                    </div>
-                                    <p class="text-left text-xs text-[#616f89] dark:text-gray-500 mt-2 pl-1">
-                                        * O código do protocolo foi enviado para seu e-mail.
-                                    </p>
-                                </label>
+
+
+                                    <a href="{% url 'busca_protocolo' %}"
+                                        class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg sm:rounded-l-none h-14 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] shadow-sm">
+                                        Consultar Status
+                                    </a>
+
                             </div>
+                            <p class="text-left text-xs text-[#616f89] dark:text-gray-500 mt-2 pl-1">
+                                * O código do protocolo foi enviado para seu e-mail.
+                            </p>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
