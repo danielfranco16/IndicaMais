@@ -25,22 +25,15 @@ def busca(request):
 
     
     if protocolo: 
-        demanda = get_object_or_404(Demanda, protocolo=protocolo)
+        demanda = Demanda.objects.filter(protocolo=protocolo).first()
         return render(request, 'busca.html', {'demanda': demanda})
     else:
         return render(request, 'busca.html')
     
-    return render(request, 'tasks-list.html', {'tasks': tasks})
-
-
-
-def acompanhamento_protocolo(request, protocolo):
-    print(  protocolo  )
-    demanda = get_object_or_404(Demanda, protocolo=protocolo)
-    form = DemandaForm(instance=demanda)
-    return render(request, 'acompanhamento.html', {'demanda': demanda})
-
 
 @vereador_required
 def lista_demandas(request):
     return render(request, 'lista_demandas.html')   
+
+
+
