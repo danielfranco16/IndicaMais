@@ -2,7 +2,3 @@ asgiref==3.11.0
 Django==5.2.10
 django-extensions==4.1
 sqlparse==0.5.5
-asgiref==3.11.0
-Django==5.2.10
-django-extensions==4.1
-sqlparse==0.5.5

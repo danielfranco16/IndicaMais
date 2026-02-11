@@ -35,7 +35,6 @@ class Indicacoes(models.Model):
     # --- Identificação ---
     titulo = models.CharField(max_length=200, verbose_name="Título")
     descricao = models.TextField(verbose_name="Descrição")
-    protocolo = models.CharField(max_length=30, unique=True, verbose_name="Protocolo")
 
     # --- Classificação ---
     status = models.CharField(
@@ -82,8 +81,8 @@ class Indicacoes(models.Model):
     cep = models.CharField(max_length=10, verbose_name="CEP")
 
     # --- Solicitante ---
-    id_demanda = models.IntegerField(verbose_name="ID da Demanda")
-    nome_vereador = models.CharField(max_length=100, verbose_name="Nome do Vereador")
+    id_demanda = models.IntegerField(verbose_name="ID da Demanda", default=0)
+    nome_vereador = models.CharField(max_length=100,  default="Não informado", verbose_name="Nome do Vereador")
 
 class Meta:
     verbose_name = "Indicação"
@@ -92,3 +91,5 @@ class Meta:
 
 def __str__(self):
     return f"{self.protocolo} - {self.titulo}"
+
+

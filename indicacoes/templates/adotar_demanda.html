@@ -1,34 +1,37 @@
 {% extends 'base_home.html' %}
-{% block title %}CADASTRO DE INDICAÇÕES{% endblock %}
+{% block title %}DETALHE DA DEMANDA{% endblock %}
 
 {% block content %}
 <div class="layout-container flex h-full grow flex-col">
     <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+        
         <form method="post" class="w-full max-w-[960px]">
             {% csrf_token %}
-            <div class="layout-content-container flex flex-col w-full flex-1 bg-white dark:bg-[#1A202C] rounded-xl shadow-sm border border-[#e5e7eb] dark:border-[#2D3748] p-6 md:p-10 mb-10">
 
-                <!-- Cabeçalho -->
+            <div class="layout-content-container flex flex-col w-full flex-1 bg-white dark:bg-[#1A202C] rounded-xl shadow-sm border border-[#e5e7eb] dark:border-[#2D3748] p-6 md:p-10 mb-10">
+                
                 <div class="flex flex-wrap justify-between gap-3 pb-6 border-b border-[#f0f2f4] dark:border-[#2D3748] mb-6">
                     <div class="flex min-w-72 flex-col gap-3">
                         <h1 class="text-[#111318] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
-                            Cadastro de Indicação
+                            Detalhes da Demanda
                         </h1>
                         <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal">
-                            Registre uma indicação parlamentar. Preencha os campos abaixo.
+                            Visualize e edite as informações desta demanda.
                         </p>
                     </div>
                 </div>
 
-                <!-- Detalhes da Indicação -->
+
+                <div class="w-full h-px bg-[#f0f2f4] dark:bg-[#2D3748] my-8"></div>
+
                 <div class="space-y-6">
                     <div class="flex items-center gap-2 text-primary">
                         <span class="material-symbols-outlined">description</span>
-                        <h3 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Detalhes da Indicação</h3>
+                        <h3 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Detalhes da Solicitação</h3>
                     </div>
                     <div class="flex flex-col gap-4">
                         <label class="flex flex-col gap-2">
-                            <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Título da Indicação *</span>
+                            <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Título da Demanda *</span>
                             {{ form.titulo }}
                         </label>
 
@@ -44,54 +47,56 @@
 
                 <div class="w-full h-px bg-[#f0f2f4] dark:bg-[#2D3748] my-8"></div>
 
-                <!-- Classificação -->
                 <div class="space-y-6">
                     <div class="flex items-center gap-2 text-primary">
                         <span class="material-symbols-outlined">category</span>
                         <h3 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Classificação</h3>
                     </div>
-
+                    
                     <div class="flex flex-col md:flex-row gap-4">
                         <label class="flex flex-col flex-1 gap-2">
                             <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Categoria *</span>
                             {{ form.categoria }}
                         </label>
+                        
                         <label class="flex flex-col flex-1 gap-2">
                             <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Urgência *</span>
                             {{ form.urgencia }}
                         </label>
                     </div>
 
-                    <!-- Endereço -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
                         <label class="flex flex-col md:col-span-3 gap-2">
                             <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Rua / Logradouro *</span>
                             {{ form.logradouro }}
                         </label>
+
                         <label class="flex flex-col gap-2">
                             <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Número *</span>
                             {{ form.numero_endereco }}
                         </label>
+
                         <label class="flex flex-col md:col-span-2 gap-2">
                             <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">Bairro *</span>
                             {{ form.bairro }}
                         </label>
+
                         <label class="flex flex-col gap-2">
                             <span class="text-[#111318] dark:text-gray-200 text-sm font-medium leading-normal">CEP *</span>
                             {{ form.cep }}
                         </label>
+
                         <div class="hidden md:block"></div>
                     </div>
                 </div>
 
-                <!-- Botões -->
                 <div class="mt-10 pt-6 border-t border-[#f0f2f4] dark:border-[#2D3748] flex flex-col-reverse sm:flex-row items-center justify-end gap-4">
                     <a href="{% url 'home' %}" class="w-full sm:w-auto px-6 py-3 rounded-lg border border-transparent text-sm font-bold text-[#616f89] dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-center">
-                        Cancelar
+                        Voltar
                     </a>
-                    <button type="submit" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-bold shadow-lg shadow-green-500/20 transition-all transform active:scale-95">
-                        <span class="material-symbols-outlined text-lg">send</span>
-                        Enviar Indicação
+                    <button type="submit" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-lg shadow-blue-500/20 transition-all transform active:scale-95">
+                        <span class="material-symbols-outlined text-lg">save</span>
+                        Salvar Alterações
                     </button>
                 </div>
 
