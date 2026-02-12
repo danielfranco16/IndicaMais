@@ -17,7 +17,8 @@ def cadastro(request):
         form = DemandaForm(request.POST)
         if form.is_valid():
             nova_demanda = form.save(commit=False)
-            nova_demanda.protocolo
+            nova_demanda.protocolo = gerar_protocolo(nova_demanda.nome_autor)
+            nova_demanda.save()
             
             return render(request, 'protocolo.html', {'form': form, 'demanda': nova_demanda})
         
