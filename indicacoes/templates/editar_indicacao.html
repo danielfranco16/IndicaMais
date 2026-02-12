@@ -1,0 +1,297 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Indicação - {{ indicacao.titulo }}{% endblock %}
+
+{% block content %}
+<main class="flex-1 w-full max-w-[1200px] mx-auto p-6 md:p-8">
+    <nav aria-label="Breadcrumb" class="flex mb-8">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+                <a class="inline-flex items-center text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white"
+                    href="#">
+                    <span class="material-symbols-outlined text-[18px] mr-2">home</span>
+                    Home
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <span
+                        class="material-symbols-outlined text-text-secondary dark:text-gray-500 text-[18px]">chevron_right</span>
+                    <a class="ml-1 text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white md:ml-2"
+                        href="#">Indicações</a>
+                </div>
+            </li>
+            <li aria-current="page">
+                <div class="flex items-center">
+                    <span
+                        class="material-symbols-outlined text-text-secondary dark:text-gray-500 text-[18px]">chevron_right</span>
+                    <span class="ml-1 text-sm font-medium text-text-main dark:text-white md:ml-2">Detalhes</span>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="flex flex-col md:flex-row gap-6 mb-8">
+        <!-- Lado esquerdo -->
+        <div class="flex flex-col gap-3 md:w-2/3">
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold
+                    {% if indicacao.status == 'aprovada' %}
+                        bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800
+                    {% elif indicacao.status == 'em_analise' %}
+                        bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800
+                    {% elif indicacao.status == 'em_votacao' %}
+                        bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800
+                    {% else %}
+                        bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400 border border-gray-200 dark:border-gray-800
+                    {% endif %}
+                    uppercase tracking-wider">
+                    {{ indicacao.status|capfirst }}
+                </span>
+                <span class="text-text-secondary text-sm">Indicação:{{ indicacao.id }}</span>
+            </div>
+            <h2 class="text-3xl font-bold tracking-tight text-text-main dark:text-white max-w-2xl leading-tight">
+                {{ indicacao.titulo }}</h2>
+        </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-8">
+            <!-- Descrição Detalhada -->
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden shadow-sm">
+                <div class="p-6 md:p-8">
+                    <h3 class="text-lg font-bold text-text-main dark:text-white mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">description</span>
+                        Descrição Detalhada
+                    </h3>
+                    <div
+                        class="prose prose-slate dark:prose-invert max-w-none text-text-main dark:text-gray-300 leading-relaxed space-y-4">
+                        <p>{{ indicacao.descricao }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tramitação -->
+           <div class="flex flex-col  space-y-8 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm"">
+                <h3 class="text-2xl font-bold text-text-main dark:text-white">Tramitação da Indicação</h3>
+                {% with status=indicacao.status %}
+                <div class="flex items-center justify-center w-full">
+                    <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-800 space-y-10 ml-2 max-w-3xl">
+
+                        <!-- 1 - Cadastrada -->
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Cadastrada</span>
+                            </div>
+                        </div>
+
+                        <!-- 2 - Em Análise -->
+                        <div class="relative">
+                            {% if status == "cadastrada" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            {% elif status != "cadastrada" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            {% else %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
+                                <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                            </span>
+                            {% endif %}
+                            <div>
+                                <span class="font-bold">Em Análise</span>
+                            </div>
+                        </div>
+
+                        <!-- 3 - Em Votação -->
+                        <div class="relative">
+                            {% if status == "em_votacao" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            {% elif status != "em_votacao" and status != "cadastrada" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            {% else %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
+                                <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                            </span>
+                            {% endif %}
+                            <div>
+                                <span class="font-bold">Em Votação</span>
+                            </div>
+                        </div>
+
+                        <!-- 4 - Aprovada -->
+                        <div class="relative">
+                            {% if status == "aprovada" or status == "em_tramitacao" or status == "em_execucao" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Aprovada</span>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- 5 - Não Aprovada -->
+                        {% if status == "nao_aprovada" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-red-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">close</span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-red-600">Não Aprovada</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- 6 - Enviada ao Executivo -->
+                        {% if status == "em_tramitacao" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Enviada ao Executivo</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- 7 - Em Execução -->
+                        {% if status == "em_execucao" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Em Execução</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- 8 - Concluída -->
+                        {% if status == "concluida" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-600 text-white">
+                                <span class="material-symbols-outlined text-[14px]">task_alt</span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-green-600">Concluída</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endwith %}
+
+
+            </div>
+        </div>
+
+        <!-- Informações secundárias -->
+        <div class="lg:col-span-1 space-y-6">
+
+             <!-- Formulário para editar o status -->
+            <div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+                <h3 class="text-xl font-bold text-text-main dark:text-white mb-6">Editar Status</h3>
+                <form method="post" action="{% url 'editar_indicacao' indicacao.id %}">
+                    {% csrf_token %}
+                      <div class="mb-4">
+                        <label for="status" class="block text-sm font-medium text-text-secondary">Novo Status</label>
+                        <select name="status" id="status" class="w-full border border-border-light dark:border-border-dark rounded-lg px-3 py-2 text-sm">
+                            <option value="cadastrada" {% if indicacao.status == 'cadastrada' %}selected{% endif %}>Cadastrada</option>
+                            <option value="em_votacao" {% if indicacao.status == 'em_votacao' %}selected{% endif %}>Em Votação</option>
+                            <option value="aprovada" {% if indicacao.status == 'aprovada' %}selected{% endif %}>Aprovada</option>
+                            <option value="nao_aprovada" {% if indicacao.status == 'nao_aprovada' %}selected{% endif %}>Não Aprovada</option>
+                            <option value="em_tramitacao" {% if indicacao.status == 'em_tramitacao' %}selected{% endif %}>Enviada ao Executivo</option>
+                            <option value="em_execucao" {% if indicacao.status == 'em_execucao' %}selected{% endif %}>Em Execução</option>
+                            <option value="concluida" {% if indicacao.status == 'concluida' %}selected{% endif %}>Concluída</option>
+                        </select>
+                    </div>
+                       <div class="flex justify-end">
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Autoria -->
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+                <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Autoria</h3>
+                <div class="flex items-center gap-4">
+                    <p class="text-base font-bold text-text-main dark:text-white leading-tight">{{ user.get_full_name }}</p>
+                </div>
+            </div>
+
+            <!-- Classificação -->
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+                <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Classificação</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">calendar_today</span> Data
+                        </span>
+                        <span
+                            class="text-sm font-medium text-text-main dark:text-white">{{indicacao.data_cadastro|date:"d  F Y" }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">category</span> Categoria
+                        </span>
+                        <span class="text-sm font-medium text-text-main dark:text-white">{{ indicacao.categoria|capfirst}}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">priority_high</span> Prioridade
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-bold
+                            {% if indicacao.urgencia == 'alta' %}
+                                bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300
+                            {% elif indicacao.urgencia == 'media' %}
+                                bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300
+                            {% else %}
+                                bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300
+                            {% endif %}
+                            uppercase">{{ indicacao.urgencia|capfirst }}</span>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+<script>
+    // Script para mostrar ou esconder o campo justificativa dependendo do status
+    document.getElementById('status').addEventListener('change', function() {
+        const justificativaContainer = document.getElementById('justificativaContainer');
+        if (this.value === 'concluida' || this.value === 'nao_aprovada') {
+            justificativaContainer.classList.remove('hidden');
+        } else {
+            justificativaContainer.classList.add('hidden');
+        }
+    });
+</script>
