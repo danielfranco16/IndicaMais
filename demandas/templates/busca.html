@@ -17,198 +17,279 @@
 
         <div class="flex flex-col gap-8">
 
-            <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-8">
+            <!-- Consulta -->
+            <div
+                class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-8">
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">search</span>
                     Consultar protocolo
                 </h3>
 
-                <form method="GET" class="w-full relative" id="protocolo-form">
+                <form method="GET" class="w-full relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
 
-                    <input type="text" name="protocolo" id="protocolo"
-                        class="block w-full pl-10 pr-28 py-3 border border-gray-300 rounded-lg leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition sm:text-sm"
+                    <input type="text" name="protocolo"
+                        class="block w-full pl-10 pr-28 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500"
                         placeholder="Ex: 2024-XXXX" value="{{ request.GET.protocolo|default:'' }}">
-                    
-                    <button type="submit" class="absolute inset-y-1 right-1 px-5 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center justify-center text-sm font-bold transition">
+
+                    <button type="submit"
+                        class="absolute inset-y-1 right-1 px-5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-bold">
                         Buscar
                     </button>
                 </form>
             </div>
 
             {% if demanda %}
-            <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-10">
+            <div
+                class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-6 sm:p-10">
 
-                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-8 border-b border-slate-100 dark:border-slate-800 gap-4">
+                <!-- Cabeçalho -->
+                <div
+                    class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-8 border-b border-slate-100 dark:border-slate-800 gap-4">
                     <div>
                         <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-1">
                             Status Atual: {{ demanda.get_status_display }}
                         </p>
+
                         <div class="flex items-center gap-3">
                             <h3 class="text-3xl font-black text-slate-900 dark:text-white font-mono">
                                 {{ demanda.protocolo }}
                             </h3>
 
                             <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold
-                                {% if demanda.status == 'concluido' %} bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300
-                                {% elif demanda.status == 'cancelado' %} bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300
-                                {% else %} bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 {% endif %}">
+                                {% if demanda.status == 'concluida' %}
+                                    bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300
+                                {% elif demanda.status == 'cancelada' or demanda.status == 'nao_aprovada' %}
+                                    bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300
+                                {% elif demanda.status == 'em_execucao' %}
+                                    bg-yellow-50 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300
+                                {% else %}
+                                    bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300
+                                {% endif %}">
 
-                                <span class="h-2 w-2 rounded-full 
-                                    {% if demanda.status == 'concluido' %} bg-green-500
-                                    {% elif demanda.status == 'cancelado' %} bg-red-500
-                                    {% else %} bg-blue-500 {% endif %}"></span>
+                                <span class="h-2 w-2 rounded-full
+                                    {% if demanda.status == 'concluida' %} bg-green-500
+                                    {% elif demanda.status == 'cancelada' or demanda.status == 'nao_aprovada' %} bg-red-500
+                                    {% elif demanda.status == 'em_execucao' %} bg-yellow-500
+                                    {% else %} bg-blue-500 {% endif %}">
+                                </span>
+
                                 {{ demanda.get_status_display|upper }}
                             </span>
                         </div>
                     </div>
-
-                    <button onclick="window.print()"
-                        class="flex items-center justify-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-6 py-3 text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">print</span>
-                        Imprimir Comprovante
-                    </button>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-10">
 
+                    <!-- Dados -->
                     <div class="md:col-span-1">
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Assunto da Demanda</h4>
-                                <h5 class="text-md font-bold text-slate-800 dark:text-gray-200 mb-2">{{ demanda.titulo }}</h5>
-                                <p class="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
-                                 {{ demanda.descricao }}
-                                </p>
-                            </div>
-
-                            <div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 space-y-3">
-                                <div>
-                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Categoria</h4>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white">{{ demanda.get_categoria_display }}</p>
-                                </div>
-                                <div>
-                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Localização</h4>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white">{{ demanda.bairro }} - {{ demanda.logradouro }}, {{ demanda.numero_endereco }}</p>
-                                </div>
-                                <div>
-                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Data de Abertura</h4>
-                                    <p class="text-sm font-medium text-slate-900 dark:text-white">
-                                        {{ demanda.data_cadastro|date:"d \d\e F \d\e Y, H:i" }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <h5 class="text-md font-bold text-slate-800 dark:text-gray-200 mb-2">
+                            {{ demanda.titulo }}
+                        </h5>
+                        <p class="text-slate-700 dark:text-slate-300">
+                            {{ demanda.descricao }}
+                        </p>
                     </div>
 
+                    <!-- Timeline -->
                     <div class="md:col-span-2">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Linha do Tempo de Evolução</h4>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">
+                            Linha do Tempo
+                        </h4>
 
+                        {% with s=demanda.status %}
                         <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-800 space-y-10 ml-2">
 
+                            <!-- 1 - Cadastrada -->
                             <div class="relative">
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
                                     <span class="material-symbols-outlined text-[14px]">check</span>
                                 </span>
-                                <div class="flex flex-col gap-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-base font-bold text-slate-900 dark:text-white">Demanda Recebida</span>
-                                        <span class="text-xs font-medium text-slate-500">{{ demanda.data_cadastro|date:"d M Y" }}</span>
-                                    </div>
-                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
-                                        Sua solicitação foi registrada com sucesso e encaminhada para a triagem técnica.
-                                    </p>
+                                <div>
+                                    <span class="font-bold">Demanda Cadastrada</span>
                                 </div>
                             </div>
 
+                            <!-- 2 - Em Análise -->
                             <div class="relative">
-                                {% if demanda.status != 'pendente' %}
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-primary text-white">
-                                    {% if demanda.status == 'em_analise' %}
-                                        <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
-                                    {% else %}
-                                        <span class="material-symbols-outlined text-[14px]">check</span>
-                                    {% endif %}
+                                {% if s == "cadastrada" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                    <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
                                 </span>
-                                <div class="flex flex-col gap-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-base font-bold text-slate-900 dark:text-white">Em Análise Técnica</span>
-                                        <span class="text-xs font-medium text-slate-500">{% if demanda.status == 'em_analise' %}Em progresso{% else %}Concluído{% endif %}</span>
-                                    </div>
-                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">A equipe técnica avaliou a viabilidade da solicitação.</p>
-                                </div>
+                                {% elif s != "cadastrada" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
                                 {% else %}
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-100 dark:bg-slate-800 text-slate-400">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
                                     <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
                                 </span>
-                                <div class="flex flex-col gap-1 opacity-50">
-                                    <span class="text-base font-bold text-slate-700 dark:text-slate-400">Em Análise Técnica</span>
-                                    <span class="text-xs text-slate-500">Aguardando fase anterior</span>
-                                </div>
                                 {% endif %}
+                                <div>
+                                    <span class="font-bold">Em Análise</span>
+                                </div>
                             </div>
 
+                            <!-- 3 - Adotada -->
                             <div class="relative">
-                                {% if demanda.status == 'em_execucao' or demanda.status == 'concluido' %}
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-primary text-white">
-                                    {% if demanda.status == 'em_execucao' %}
-                                        <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
-                                    {% else %}
-                                        <span class="material-symbols-outlined text-[14px]">check</span>
-                                    {% endif %}
+                                {% if s == "adotada" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                    <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
                                 </span>
-                                <div class="flex flex-col gap-1">
-                                    <span class="text-base font-bold text-slate-900 dark:text-white">Encaminhado ao Executivo</span>
-                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">A demanda foi aprovada e enviada para execução pela prefeitura.</p>
-                                </div>
+                               {% elif s == "em_votacao" or s == "aprovada" or s == "nao_aprovada" or s == "em_tramitacao" or s == "em_execucao" or s == "concluida" or s == "cancelada" %}
+
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
                                 {% else %}
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-100 dark:bg-slate-800 text-slate-400">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
                                     <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
                                 </span>
-                                <div class="flex flex-col gap-1 opacity-50">
-                                    <span class="text-base font-bold text-slate-700 dark:text-slate-400">Encaminhado ao Executivo</span>
-                                    <span class="text-xs text-slate-500">Aguardando análise</span>
-                                </div>
                                 {% endif %}
+                                <div>
+                                    <span class="font-bold">Demanda Adotada</span>
+                                </div>
                             </div>
 
+                            <!-- 4 - Em Votação -->
                             <div class="relative">
-                                {% if demanda.status == 'concluido' %}
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
-                                    <span class="material-symbols-outlined text-[14px]">task_alt</span>
+                                {% if s == "em_votacao" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                    <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
                                 </span>
-                                <div class="flex flex-col gap-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-base font-bold text-green-600 dark:text-green-400">Conclusão e Resposta</span>
-                                        <span class="text-xs font-medium text-slate-500">{{ demanda.data_conclusao|date:"d M Y" }}</span>
-                                    </div>
-                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">A demanda foi atendida e finalizada.</p>
-                                </div>
+                                {% elif s in "aprovada nao_aprovada em_tramitacao em_execucao concluida cancelada" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
                                 {% else %}
-                                <span class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-100 dark:bg-slate-800 text-slate-400">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
+                                    <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                                </span>
+                                {% endif %}
+                                <div>
+                                    <span class="font-bold">Em Votação</span>
+                                </div>
+                            </div>
+
+                            <!-- 5 - Aprovada -->
+                            {% if s in "aprovada em_tramitacao em_execucao concluida" %}
+                            <div class="relative">
+                                {% if s == "aprovada" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                    <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                                </span>
+                                {% else %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
+                                {% endif %}
+                                <div>
+                                    <span class="font-bold">Aprovada</span>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- 6 - Não Aprovada -->
+                            {% if s == "nao_aprovada" %}
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-red-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">close</span>
+                                </span>
+                                <div>
+                                    <span class="font-bold text-red-600">Não Aprovada</span>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- 7 - Em Tramitação -->
+                            {% if s in "em_tramitacao em_execucao concluida" %}
+                            <div class="relative">
+                                {% if s == "em_tramitacao" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                    <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                                </span>
+                                {% else %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
+                                {% endif %}
+                                <div>
+                                    <span class="font-bold">Em Tramitação</span>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- 8 - Em Execução -->
+                            {% if s in "em_execucao concluida" %}
+                            <div class="relative">
+                                {% if s == "em_execucao" %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                    <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                                </span>
+                                {% else %}
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                </span>
+                                {% endif %}
+                                <div>
+                                    <span class="font-bold">Em Execução</span>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- 9 - Concluída -->
+                            {% if s == "concluida" %}
+                            <div class="relative">
+                                <span
+                                    class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-600 text-white">
                                     <span class="material-symbols-outlined text-[14px]">task_alt</span>
                                 </span>
-                                <div class="flex flex-col gap-1 opacity-50">
-                                    <span class="text-base font-bold text-slate-700 dark:text-slate-400">Conclusão e Resposta</span>
-                                    <span class="text-xs text-slate-500">Aguardando</span>
+                                <div>
+                                    <span class="font-bold text-green-600">Concluída</span>
                                 </div>
-                                {% endif %}
                             </div>
+                            {% endif %}
 
                         </div>
+
+                        
+                        {% endwith %}
+
+
                     </div>
+
                 </div>
             </div>
-            
+
             {% elif request.GET.protocolo %}
-            <div class="rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-8 text-center">
+            <div class="rounded-xl bg-red-50 border border-red-200 p-8 text-center">
                 <span class="material-symbols-outlined text-red-500 text-4xl mb-2">search_off</span>
-                <h3 class="text-lg font-bold text-red-700 dark:text-red-400">Nenhum protocolo encontrado</h3>
-                <p class="text-red-600 dark:text-red-300">Verifique se digitou o código corretamente: <strong>{{ request.GET.protocolo }}</strong></p>
+                <h3 class="text-lg font-bold text-red-700">
+                    Nenhum protocolo encontrado
+                </h3>
             </div>
             {% endif %}
 

@@ -1,10 +1,10 @@
 {% extends 'base_home.html' %}
 
-{% block title %}Indicação{% endblock %}
+{% block title %}Indicação - {{ indicacao.titulo }}{% endblock %}
 
 {% block content %}
 <main class="flex-1 w-full max-w-[1200px] mx-auto p-6 md:p-8">
-    <nav aria-label="Breadcrumb" class="flex mb-6">
+    <nav aria-label="Breadcrumb" class="flex mb-8">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
             <li class="inline-flex items-center">
                 <a class="inline-flex items-center text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white"
@@ -30,33 +30,35 @@
             </li>
         </ol>
     </nav>
-    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
-        <div class="flex flex-col gap-3">
+
+    <div class="flex flex-col md:flex-row gap-6 mb-8">
+        <!-- Lado esquerdo -->
+        <div class="flex flex-col gap-3 md:w-2/3">
             <div class="flex flex-wrap items-center gap-3">
-                <span
-                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800 uppercase tracking-wider">
-                    Aprovada
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold
+                    {% if indicacao.status == 'aprovada' %}
+                        bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800
+                    {% elif indicacao.status == 'em_analise' %}
+                        bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800
+                    {% elif indicacao.status == 'em_votacao' %}
+                        bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800
+                    {% else %}
+                        bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400 border border-gray-200 dark:border-gray-800
+                    {% endif %}
+                    uppercase tracking-wider">
+                    {{ indicacao.status|capfirst }}
                 </span>
-                <span class="text-text-secondary text-sm">Indicação: 01-2026</span>
+                <span class="text-text-secondary text-sm">Indicação:{{ indicacao.id }}</span>
             </div>
             <h2 class="text-3xl font-bold tracking-tight text-text-main dark:text-white max-w-2xl leading-tight">
-                Manutenção da iluminação pública no Bairro Porto Belo</h2>
-        </div>
-        <div class="flex gap-3 shrink-0">
-            <button
-                class="px-5 py-2.5 rounded-lg border border-border-light dark:border-border-dark text-text-main dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-surface-dark/50 transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
-                Imprimir PDF
-            </button>
-            <button
-                class="px-5 py-2.5 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover shadow-sm shadow-primary/30 flex items-center gap-2 transition-colors">
-                <span class="material-symbols-outlined text-[20px]">edit</span>
-                Editar
-            </button>
+                {{ indicacao.titulo }}</h2>
         </div>
     </div>
+
+    <!-- Conteúdo principal -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2 space-y-8">
+            <!-- Descrição Detalhada -->
             <div
                 class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden shadow-sm">
                 <div class="p-6 md:p-8">
@@ -66,69 +68,158 @@
                     </h3>
                     <div
                         class="prose prose-slate dark:prose-invert max-w-none text-text-main dark:text-gray-300 leading-relaxed space-y-4">
-                        <p>Venho por meio desta indicação solicitar ao Poder Executivo Municipal, através da Secretaria
-                            de Obras e Serviços Urbanos, a realização de manutenção preventiva e corretiva em todo o
-                            sistema de iluminação pública na Rua das Flores da Mercado do Povo no Bairro Porto Belo.</p>
-                        <p>Justifica-se o pedido devido ao elevado número de lâmpadas queimadas, conforme demandas enviada pelo cidadão Osvaldo, o que tem gerado
-                            insegurança aos moradores e transeuntes no período noturno. Além disso, as árvores da
-                            localidade necessitam de poda, pois os galhos estão obstruindo a luminosidade das luminárias
-                            que ainda funcionam, criando pontos cegos.</p>
-                     
-                        <p>A medida visa garantir o bem-estar da população e prevenir a ocorrência de delitos
-                            facilitados pela escuridão.</p>
+                        <p>{{ indicacao.descricao }}</p>
                     </div>
                 </div>
             </div>
-            <div
-                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm">
-                <h3 class="text-lg font-bold text-text-main dark:text-white mb-6 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary">attach_file</span>
-                    Arquivos Anexos
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div
-                        class="flex items-center p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-background-dark/50 cursor-pointer transition-colors group">
-                        <div class="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 rounded mr-3">
-                            <span class="material-symbols-outlined">picture_as_pdf</span>
+
+            <!-- Tramitação -->
+            <div class="flex flex-col  space-y-8 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm"">
+                <h3 class="text-2xl font-bold text-text-main dark:text-white">Tramitação da Indicação</h3>
+                {% with status=indicacao.status %}
+                <div class="flex items-center justify-center w-full">
+                    <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-800 space-y-10 ml-2 max-w-3xl">
+
+                        <!-- 1 - Cadastrada -->
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Cadastrada</span>
+                            </div>
                         </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-text-main dark:text-white truncate">
-                                relatorio_tecnico_iluminacao.pdf</p>
-                            <p class="text-xs text-text-secondary">2.4 MB</p>
+
+                        <!-- 2 - Em Análise -->
+                        <div class="relative">
+                            {% if status == "cadastrada" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            {% elif status != "cadastrada" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            {% else %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
+                                <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                            </span>
+                            {% endif %}
+                            <div>
+                                <span class="font-bold">Em Análise</span>
+                            </div>
                         </div>
-                        <span
-                            class="material-symbols-outlined text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
-                    </div>
-                    <div
-                        class="flex items-center p-3 rounded-lg border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-background-dark/50 cursor-pointer transition-colors group">
-                        <div class="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded mr-3">
-                            <span class="material-symbols-outlined">image</span>
+
+                        <!-- 3 - Em Votação -->
+                        <div class="relative">
+                            {% if status == "em_votacao" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            {% elif status != "em_votacao" and status != "cadastrada" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            {% else %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-slate-200 text-slate-400">
+                                <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                            </span>
+                            {% endif %}
+                            <div>
+                                <span class="font-bold">Em Votação</span>
+                            </div>
                         </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-text-main dark:text-white truncate">foto_local_noite.jpg
-                            </p>
-                            <p class="text-xs text-text-secondary">1.8 MB</p>
+
+                        <!-- 4 - Aprovada -->
+                        <div class="relative">
+                            {% if status == "aprovada" or status == "em_tramitacao" or status == "em_execucao" %}
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">check</span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Aprovada</span>
+                            </div>
+                            {% endif %}
                         </div>
-                        <span
-                            class="material-symbols-outlined text-text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+
+                        <!-- 5 - Não Aprovada -->
+                        {% if status == "nao_aprovada" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-red-500 text-white">
+                                <span class="material-symbols-outlined text-[14px]">close</span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-red-600">Não Aprovada</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- 6 - Enviada ao Executivo -->
+                        {% if status == "em_tramitacao" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Enviada ao Executivo</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- 7 - Em Execução -->
+                        {% if status == "em_execucao" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-blue-600 text-white">
+                                <span class="animate-pulse h-2 w-2 rounded-full bg-white"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold">Em Execução</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- 8 - Concluída -->
+                        {% if status == "concluida" %}
+                        <div class="relative">
+                            <span
+                                class="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-white dark:ring-slate-900 bg-green-600 text-white">
+                                <span class="material-symbols-outlined text-[14px]">task_alt</span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-green-600">Concluída</span>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
+                {% endwith %}
+
+
             </div>
         </div>
+
+        <!-- Informações secundárias -->
         <div class="lg:col-span-1 space-y-6">
             <div
                 class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
                 <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Autoria</h3>
                 <div class="flex items-center gap-4">
-                     <div class="size-24 md:size-32 rounded-full bg-cover bg-center border-4 border-white dark:border-gray-700 shadow-md"
-                            data-alt="Large profile picture of Joao da Silva"
-                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCymPtyRkv4qS_Dpc0wMQ3In1bu5y3_770_e1qBMSAzpvOuvnctJ0nb81SDZQeTV8aUjj-mCjcHVdnR7Hk3mahX53wlfHN42usSG6Nf-g6cHTrnSQjf-vc6amPbnH9mrtIJL4dShj_NjkRBpng0QJebJ2eTuABhSrayLK-Tt8TWAvMt4lSaxx0ZbijSaNJc2T4hrhGOkaTrrUHwdKAG07YpA6mD-tRZpViJ-AZUUCA1cfMqdmLCjW9VzFVVziujB3E2E-KSRfo_WF0t');">
-                        </div>
-                        <p class="text-base font-bold text-text-main dark:text-white leading-tight">João Vereador</p>
-                        <p class="text-sm text-text-secondary">Partido Verde - PV</p>
-                    </div>
+                    <p class="text-base font-bold text-text-main dark:text-white leading-tight">{{ user.get_full_name }}
+                    </p>
                 </div>
             </div>
+
             <div
                 class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
                 <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Classificação</h3>
@@ -137,75 +228,89 @@
                         <span class="text-sm text-text-secondary flex items-center gap-2">
                             <span class="material-symbols-outlined text-[18px]">calendar_today</span> Data
                         </span>
-                        <span class="text-sm font-medium text-text-main dark:text-white">15 Janeiro 2026</span>
+                        <span
+                            class="text-sm font-medium text-text-main dark:text-white">{{indicacao.data_cadastro|date:"d  F Y" }}</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-text-secondary flex items-center gap-2">
                             <span class="material-symbols-outlined text-[18px]">category</span> Categoria
                         </span>
-                        <span class="text-sm font-medium text-text-main dark:text-white">Infraestrutura</span>
+                        <span class="text-sm font-medium text-text-main dark:text-white">{{ indicacao.categoria|capfirst}}</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-text-secondary flex items-center gap-2">
                             <span class="material-symbols-outlined text-[18px]">priority_high</span> Prioridade
                         </span>
-                        <span
-                            class="px-2 py-0.5 rounded text-[11px] font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300 uppercase">Alta</span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-bold
+                            {% if indicacao.urgencia == 'alta' %}
+                                bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300
+                            {% elif indicacao.urgencia == 'media' %}
+                                bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300
+                            {% else %}
+                                bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300
+                            {% endif %}
+                            uppercase">{{ indicacao.urgencia|capfirst }}</span>
                     </div>
                 </div>
             </div>
-            <div
-                class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
-                <h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-6">Tramitação</h3>
-                <div class="space-y-6">
-                    <div class="relative pl-8 timeline-item">
-                        <div
-                            class="absolute left-0 top-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center z-10 border-4 border-surface-light dark:border-surface-dark">
-                            <span class="material-symbols-outlined text-white text-[14px]">check</span>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-text-main dark:text-white">Recebido pela Prefeitura</p>
-                            <p class="text-xs text-text-secondary">22 janeiro 2026 • 14:30</p>
-                            <p class="text-xs mt-1 text-text-secondary italic">Aguardando cronograma de obras.</p>
-                        </div>
-                    </div>
-                    <div class="relative pl-8 timeline-item">
-                        <div
-                            class="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10 border-4 border-surface-light dark:border-surface-dark">
-                            <span class="material-symbols-outlined text-white text-[14px]">gavel</span>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-text-main dark:text-white">Aprovada em Plenário</p>
-                            <p class="text-xs text-text-secondary">22 janeiro 2026 • 11:15</p>
-                        </div>
-                    </div>
-                    <div class="relative pl-8 timeline-item">
-                        <div
-                            class="absolute left-0 top-0 w-6 h-6 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center z-10 border-4 border-surface-light dark:border-surface-dark">
-                            <span class="material-symbols-outlined text-white text-[14px]">add</span>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-text-main dark:text-white">Indicação Criada</p>
-                            <p class="text-xs text-text-secondary">20 Janeiro, 2026 • 10:00</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 p-5">
                 <div class="flex gap-3">
                     <span class="material-symbols-outlined text-primary shrink-0">info</span>
                     <div>
                         <h4 class="text-sm font-bold text-text-main dark:text-white mb-1">Próximos Passos</h4>
+
+                        {% with status=indicacao.status %}
+                        <p> status: {{ status }}</p>
+
+                        <!-- Exibição de próximos passos com base no status -->
+                        {% if status == 'cadastrada' %}
                         <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
-                            A indicação agora está em posse da Secretaria de Obras para análise de viabilidade técnica e
-                            financeira.
+                            A indicação está em análise. Aguarde a revisão técnica.
                         </p>
+
+                        {% elif status == 'em_votacao' %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação está em votação. Após a aprovação, será encaminhada para o Executivo.
+                        </p>
+
+                        {% elif status == 'aprovada' %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação foi aprovada. Próximos passos: enviar para execução.
+                        </p>
+
+                        {% elif status == 'nao_aprovada' %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação não foi aprovada. Verifique os pontos que precisam ser ajustados.
+                        </p>
+
+                        {% elif status == 'em_tramitacao' %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação foi enviada ao Executivo para análise de viabilidade.
+                        </p>
+
+                        {% elif status == 'em_execucao' %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação está em execução. Acompanhe o progresso da implementação.
+                        </p>
+
+                        {% elif status == 'concluida' %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            A indicação foi concluída e a execução foi finalizada.
+                        </p>
+
+                        {% else %}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                            Status desconhecido. Verifique o andamento da indicação.
+                        </p>
+                        {% endif %}
+                        {% endwith %}
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
-</main> 
-
-
+</main>
 {% endblock %}

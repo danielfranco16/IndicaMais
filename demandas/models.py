@@ -8,9 +8,14 @@ class Demanda(models.Model):
     STATUS_CHOICES = [
         ("cadastrada", "Cadastrada"),
         ("em_analise", "Em Análise"),
+        ("adotada", "Adotada"),
+        ("em_votacao", "Em Votação"),
+        ("aprovada", "Aprovada"),
+        ("nao_aprovada", "Não Aprovada"),
+        ("em_tramitacao", "Enviada ao Executivo"),
         ("em_execucao", "Em Execução"),
-        ("concluido", "Concluído"),
-        ("cancelado", "Cancelado"),
+        ("concluida", "Concluída"),
+        ("cancelada", "Cancelada"),
     ]
 
     URGENCIA_CHOICES = [

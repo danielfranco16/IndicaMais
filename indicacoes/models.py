@@ -7,9 +7,12 @@ class Indicacoes(models.Model):
     STATUS_CHOICES = [
         ("cadastrada", "Cadastrada"),
         ("em_analise", "Em Análise"),
+        ("em_votacao", "Em Votação"),
+        ("aprovada", "Aprovada"),
+        ("nao_aprovada", "Não Aprovada"),
+        ("em_tramitacao", "Enviada ao Executivo"),
         ("em_execucao", "Em Execução"),
-        ("concluido", "Concluído"),
-        ("cancelado", "Cancelado"),
+        ("concluida", "Concluída"),
     ]
 
     URGENCIA_CHOICES = [
@@ -40,7 +43,7 @@ class Indicacoes(models.Model):
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
-        default="Cadastrada",
+        default="cadastrada",
         verbose_name="Situação",
     )
 
@@ -91,5 +94,8 @@ class Meta:
 
 def __str__(self):
     return f"{self.protocolo} - {self.titulo}"
+
+def __str__(self):
+    return self.status
 
 

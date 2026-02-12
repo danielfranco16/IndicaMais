@@ -6,4 +6,4 @@ from .models import Demanda
 @admin.register(Demanda)
 class DemandaAdmin(admin.ModelAdmin):
     # Campos que aparecem na lista de usuários
-    list_display = ('titulo', 'nome_autor', 'categoria', 'urgencia', 'data_cadastro', 'status')
+    list_display = ('id', 'titulo', 'nome_autor', 'categoria', 'urgencia', 'data_cadastro', 'status')

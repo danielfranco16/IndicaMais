@@ -11,7 +11,10 @@ urlpatterns = [
 
 
 
-    path('detalhar/', views.detalhar, name='detalhar_indicacao'), # Rota para detalhar uma demanda específica
+    path('detalhar/<int:id>/', views.detalhar, name='detalhar_indicacao'), # Rota para detalhar uma demanda específica
+
+
+    
     path('lista-camara/', views.lista_camara, name='lista_indicacoes_camara'), # Rota para a página inicial do módulo demandas
     path('lista-prefeitura/', views.lista_prefeitura, name='lista_indicacoes_prefeitura'), # Rota para a página inicial do módulo demandas para prefeitura
     path('minhas-indicacoes/', views.lista_vereador, name='lista_indicacoes_vereador'), # Rota para a página inicial do módulo demandas para vereadores

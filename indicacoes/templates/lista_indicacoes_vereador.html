@@ -11,8 +11,10 @@
         <div class="layout-content-container flex flex-col max-w-[1200px] flex-1 w-full gap-8">
             <div class="flex flex-wrap justify-between items-center gap-4">
                 <div class="flex min-w-72 flex-col gap-1">
-                    <h1 class="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">Minhas Indicações</h1>
-                    <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal">Acompanhe andamento das suas solicitações ao executivo.</p>
+                    <h1 class="text-[#111318] dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">
+                        Minhas Indicações</h1>
+                    <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal">Acompanhe
+                        andamento das suas solicitações ao executivo.</p>
                 </div>
                 <a href="{% url 'cadastro_indicacao' %}"
                     class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-all shadow-sm shadow-primary/30">
@@ -20,7 +22,7 @@
                     <span class="hidden lg:inline">Nova Indicação</span>
                 </a>
             </div>
-            
+
             <div
                 class="bg-white dark:bg-[#1e2530] rounded-xl border border-[#dbdfe6] dark:border-gray-700 p-5 shadow-sm">
                 <div class="flex flex-col md:flex-row gap-4">
@@ -95,86 +97,83 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-[#dbdfe6] dark:divide-gray-700">
+                            {% for indicacao in indicacoes %}
                             <tr class="group hover:bg-primary/[0.02] dark:hover:bg-[#252b36] transition-colors">
                                 <td class="px-6 py-4">
                                     <div class="flex flex-col gap-1">
-                                        <a href="{% url 'detalhar_indicacao' %}" class="text-[#111318] dark:text-white font-semibold text-sm">Instalação de
-                                            semáforo na Av. Brasil</span>
-                                        <span class="text-primary text-[11px] font-mono font-bold">2023-1102</span>
+                                        <a href="{% url 'detalhar_indicacao' indicacao.id %}"
+                                            class="text-[#111318] dark:text-white font-semibold text-sm">
+                                            {{ indicacao.titulo }}
+                                        </a>
+                                        <span class="text-primary text-[11px] font-mono font-bold">{{ indicacao.codigo}}</span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400">
-                                        Trânsito
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold
+                    {% if indicacao.categoria == 'Trânsito' %} bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 {% endif %}">
+                                        {{ indicacao.categoria }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-2">
-                                        <div class="h-2 w-2 rounded-full bg-red-500"></div>
-                                        <span class="text-sm text-[#111318] dark:text-gray-200">Alta</span>
+                                        <div
+                                            class="h-2 w-2 rounded-full {% if indicacao.priority == 'Alta' %} bg-red-500 {% endif %}">
+                                        </div>
+                                        <span class="text-sm text-[#111318] dark:text-gray-200">{{ indicacao.prioridade}}</span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span
                                         class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-black bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-500 border border-blue-200 dark:border-blue-900/50 uppercase">
-                                        Em Análise
+                                        {{ indicacao.status }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <span
-                                        class="text-sm text-[#616f89] dark:text-gray-400 tabular-nums">15/11/2023</span>
+                                    <span class="text-sm text-[#616f89] dark:text-gray-400 tabular-nums">
+                                        {{ indicacao.data_cadastro|date:"d M, Y" }}
+                                    </span>
                                 </td>
                             </tr>
-
-                            
-                            
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-slate-500">Nenhuma indicação
+                                    encontrada</td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
+
                     </table>
                 </div>
-                <div
-                    class="flex items-center justify-between border-t border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-[#1e2530] px-6 py-4">
-                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                        <div>
-                            <p class="text-sm text-[#616f89] dark:text-gray-400">
-                                Mostrando <span class="font-bold text-[#111318] dark:text-white">1</span> a <span
-                                    class="font-bold text-[#111318] dark:text-white">10</span> de <span
-                                    class="font-bold text-[#111318] dark:text-white">128</span> indicações
-                            </p>
-                        </div>
-                        <div>
-                            <nav aria-label="Pagination"
-                                class="isolate inline-flex -space-x-px rounded-lg shadow-sm border border-[#dbdfe6] dark:border-gray-700 overflow-hidden">
-                                <a class="relative inline-flex items-center px-3 py-2 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    href="#">
-                                    <span class="material-symbols-outlined !text-[20px]">chevron_left</span>
-                                </a>
-                                <a aria-current="page"
-                                    class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-bold text-white focus:z-20"
-                                    href="#">1</a>
-                                <a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#111318] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    href="#">2</a>
-                                <a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#111318] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    href="#">3</a>
-                                <span
-                                    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-[#616f89] dark:text-gray-500">...</span>
-                                <a class="relative inline-flex items-center px-3 py-2 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    href="#">
-                                    <span class="material-symbols-outlined !text-[20px]">chevron_right</span>
-                                </a>
-                            </nav>
-                        </div>
-                    </div>
+               <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <nav aria-label="Pagination" class="flex items-center gap-2">
+                        {% if indicacoes.has_previous %}
+                        <a href="?page={{ indicacoes.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                            class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#616f89] dark:text-[#a0aec0] hover:bg-gray-50 dark:hover:bg-[#2d3748]">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </a>
+                        {% endif %}
+
+                        {% for num in indicacoes.paginator.page_range %}
+                        {% if indicacoes.number == num %}
+                        <button
+                            class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white font-bold">
+                            {{ num }}</button>
+                        {% else %}
+                        <a href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                            class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#111318] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2d3748]">
+                            {{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+                        {% if indicacoes.has_next %}
+                        <a href="?page={{ indicacoes.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                            class="flex items-center justify-center w-10 h-10 rounded-lg border border-[#dbdfe6] dark:border-[#2d3748] text-[#616f89] dark:text-[#a0aec0] hover:bg-gray-50 dark:hover:bg-[#2d3748]">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </a>
+                        {% endif %}
+                    </nav>
                 </div>
-            </div>
-            <div class="flex items-center gap-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
-                <span class="material-symbols-outlined text-primary !text-[24px]">info</span>
-                <p class="text-sm text-[#111318] dark:text-gray-300 leading-relaxed">
-                    <strong>Dica Legislativa:</strong> As indicações aprovadas são enviadas automaticamente para o
-                    Executivo Municipal. Você pode anexar fotos e documentos ao detalhar uma nova indicação para
-                    fortalecer seu pedido.
-                </p>
-            </div>
         </div>
     </div>
 </main>

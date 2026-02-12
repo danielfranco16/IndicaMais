@@ -8,4 +8,4 @@ from .models import Indicacoes
 @admin.register(Indicacoes)
 class IndicacoesAdmin(admin.ModelAdmin):
     # Campos que aparecem na lista de usuários
-    list_display = ('titulo', 'nome_vereador', 'categoria', 'urgencia', 'data_cadastro', 'status', 'id_demanda')
+    list_display = ('id', 'titulo', 'nome_vereador', 'categoria', 'urgencia', 'data_cadastro', 'status', 'id_demanda')
