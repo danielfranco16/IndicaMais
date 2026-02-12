@@ -63,8 +63,32 @@ def detalhar(request, id):
 
 
 @camara_required
+def editar(request, id): 
+
+    if request.method == 'GET':
+         indicacao = get_object_or_404(Indicacoes, id=id)
+         return render(request, 'editar_indicacao.html', {'indicacao': indicacao})
+    elif request.method == 'POST':
+        indicacao = get_object_or_404(Indicacoes, id=id)
+        indicacao.status = request.POST.get('status')
+        indicacao.save()
+        return redirect('editar_indicacao', id=indicacao.id)  # Redireciona para a página de edição da indicação após a edição
+    
+    return render(request, 'editar_indicacao.html')
+
+
+
+@camara_required
 def lista_camara(request):
-    return render(request, 'lista_indicacoes_camara.html')
+   if request.method == 'GET':
+         
+        indicacoes = Indicacoes.objects.all().order_by('-data_cadastro')  # Ordena as indicações do mais recente para o mais antigo
+        paginator = Paginator(indicacoes, 6)  # Apresenta 6 indicações por página
+        page_number = request.GET.get('page')
+        indicacoes = paginator.get_page(page_number)   
+         
+        return render(request, 'lista_indicacoes_camara.html', {'indicacoes': indicacoes})
+\
 
 @prefeitura_required
 def lista_prefeitura(request):
@@ -76,7 +100,7 @@ def lista_vereador(request):
      if request.method == 'GET':
          
         indicacoes = Indicacoes.objects.filter(nome_vereador=request.user).order_by('-data_cadastro')  # Ordena as indicações do mais recente para o mais antigo
-        paginator = Paginator(indicacoes, 8)  # Apresenta 8 indicações por página
+        paginator = Paginator(indicacoes, 8 )  # Apresenta 8 indicações por página
         page_number = request.GET.get('page')
         indicacoes = paginator.get_page(page_number)   
          
